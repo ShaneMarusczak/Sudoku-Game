@@ -15,9 +15,9 @@
 	let hours = 0;
 	var board = [];
 	const copiedBoard = [];
-	let dificulty;
+	let difficulty;
 	let solved = false;
-	const dificultySettings = {
+	const difficultySettings = {
 		"easy": 1,
 		"hard": 3,
 		"insane": 5,
@@ -52,16 +52,16 @@
 
 	const start = () => {
 		solved = false;
-		dificulty = Array.from(document.getElementsByName("dificulty")).find(input => input.checked);
+		difficulty = Array.from(document.getElementsByName("difficulty")).find(input => input.checked);
 
-		if (typeof dificulty === "undefined") {
-			alert("Please select a dificulty.");
+		if (typeof difficulty === "undefined") {
+			alert("Please select a difficulty.");
 			return;
 		}
 		generateRandomBoard();
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
-				if (randomIntFromInterval(0, dificultySettings[dificulty.value]) === 0) {
+				if (randomIntFromInterval(0, difficultySettings[difficulty.value]) === 0) {
 					document.getElementById("s" + y + x).value = copiedBoard[y][x];
 					document.getElementById("s" + y + x).readOnly = true;
 				}
