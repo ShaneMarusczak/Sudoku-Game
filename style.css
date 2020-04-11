@@ -25,12 +25,7 @@ body {
 #s42,#s52,#s62,#s72,
 #s82, #s05, #s15, #s25,
 #s35, #s45, #s55, #s65,
-#s75, #s85,
-#a02,#a12,#a22,#a32,
-#a42,#a52,#a62,#a72,
-#a82, #a05, #a15, #a25,
-#a35, #a45, #a55, #a65,
-#a75, #a85 {
+#s75, #s85 {
 	border-right: 4px solid black !important;
 }
 
@@ -38,17 +33,11 @@ body {
 #s24,#s25,#s26,#s27,
 #s28, #s50, #s51, #s52,
 #s53, #s54, #s55, #s56,
-#s57, #s58,
-#a20,#a21,#a22,#a23,
-#a24,#a25,#a26,#a27,
-#a28, #a50, #a51, #a52,
-#a53, #a54, #a55, #a56,
-#a57, #a58 {
+#s57, #s58 {
 	border-bottom: 4px solid black !important;
 }
 
-#sudoku,
-#solution {
+#sudoku {
 	display: grid;
 	margin-right: 30px;
 }
@@ -78,12 +67,8 @@ button {
 }
 
 @media screen and (max-width: 1427px) {
-	#sudoku > div,
-	#solution > div {
+	#sudoku > div {
 		display: flex;
-	}
-	#boards {
-		flex-direction: column;
 	}
 }
 
