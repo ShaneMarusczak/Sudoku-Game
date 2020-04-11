@@ -2,6 +2,7 @@
 
 (() => {
 	//#region variables
+	var runningTimer;
 	const rows = 9;
 	const cols = 9;
 	const boardUI = document.getElementById("sudoku");
@@ -37,13 +38,13 @@
 			}
 		}
 		timer.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
-			(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
-			(seconds > 9 ? seconds : "0" + seconds);
+							(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
+							(seconds > 9 ? seconds : "0" + seconds);
 		timerStart();
 	};
 
 	const timerStart = () => {
-		var t = setTimeout(add, 1000);
+		runningTimer = setTimeout(add, 1000);
 	};
 
 	//inclusive
@@ -82,7 +83,7 @@
 				}
 			}
 		}
-		clearTimeout(t);
+		clearTimeout(runningTimer);
 		alert("Correct!");
 	};
 
