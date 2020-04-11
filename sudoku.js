@@ -18,7 +18,8 @@
 	let solved = false;
 	const dificultySettings = {
 		"easy": 1,
-		"hard": 4,
+		"hard": 3,
+		"insane": 5,
 		"medium": 2
 	};
 	//#endregion
