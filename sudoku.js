@@ -241,10 +241,10 @@
 	};
 
 	const disableRadios = () => {
-		document.getElementById("Easy").disabled = true;
-		document.getElementById("Medium").disabled = true;
-		document.getElementById("Hard").disabled = true;
-		document.getElementById("Insane").disabled = true;
+		const radios = document.querySelectorAll(".radio");
+		for (const radio of radios) {
+			radio.disabled = true;
+		}
 	};
 	//#endregion
 
