@@ -19,6 +19,17 @@ body {
 
 #difficultySelect {
 	display: flex;
+	margin-bottom: 15px;
+}
+
+
+#difficultySelect > label {
+	font-size: x-large;
+}
+
+#difficultySelect > input {
+	width: 25px;
+	height: 25px;
 }
 
 #s02,#s12,#s22,#s32,

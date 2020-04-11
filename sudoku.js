@@ -78,6 +78,7 @@
 				}
 			}
 		}
+		timer.classList.remove("hide");
 		timerStart();
 	};
 
