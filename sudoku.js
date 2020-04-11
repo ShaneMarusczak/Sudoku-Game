@@ -83,8 +83,7 @@
 		if (gameStarted) {
 			return;
 		}
-		gameStarted = true;
-		solved = false;
+
 		difficulty = Array.from(document.getElementsByName("difficulty")).find(input => input.checked);
 
 		if (typeof difficulty === "undefined") {
@@ -100,9 +99,12 @@
 				}
 			}
 		}
+		solved = false;
+		gameStarted = true;
 		hintBtn.classList.remove("hide");
 		timer.classList.remove("hide");
 		timerStart();
+		disableRadios();
 	};
 
 	const checkAnswer = () => {
@@ -236,6 +238,13 @@
 		board[7][2] = randomIntFromInterval(1, 9);
 		board[8][5] = randomIntFromInterval(1, 9);
 		solve();
+	};
+
+	const disableRadios = () => {
+		document.getElementById("Easy").disabled = true;
+		document.getElementById("Medium").disabled = true;
+		document.getElementById("Hard").disabled = true;
+		document.getElementById("Insane").disabled = true;
 	};
 	//#endregion
 
