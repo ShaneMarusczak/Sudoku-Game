@@ -31,7 +31,7 @@ body {
 #a82, #a05, #a15, #a25,
 #a35, #a45, #a55, #a65,
 #a75, #a85 {
-	border-right: 4px solid black;
+	border-right: 4px solid black !important;
 }
 
 #s20,#s21,#s22,#s23,
@@ -44,7 +44,7 @@ body {
 #a28, #a50, #a51, #a52,
 #a53, #a54, #a55, #a56,
 #a57, #a58 {
-	border-bottom: 4px solid black;
+	border-bottom: 4px solid black !important;
 }
 
 #sudoku,
