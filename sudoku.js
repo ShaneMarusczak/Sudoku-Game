@@ -52,6 +52,7 @@
 		dificulty = Array.from(document.getElementsByName("dificulty")).find(input => input.checked);
 
 		if (dificulty === undefined) {
+			alert("Please select a dificulty.");
 			return;
 		}
 		generateRandomBoard();
