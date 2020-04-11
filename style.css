@@ -121,3 +121,34 @@ button:hover {
 	cursor: pointer;
 	background-color: #ddd;
 }
+
+#alertshader {
+	z-index: 1;
+	display: none;
+	position: fixed;
+	padding: 0;
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+#alert {
+	text-align: center;
+	border-radius: 5px;
+	box-shadow: inset 0px 0px 0px 4px black;
+	margin-left: 40vw;
+	margin-top: 10vh;
+	background-color: azure;
+	width: 20vw;
+	height:15vh;
+}
+
+#alertmessage {
+	vertical-align: middle;
+	font-family: "Orbitron", sans-serif;
+	font-size: x-large;
+	line-height: 15vh;
+}

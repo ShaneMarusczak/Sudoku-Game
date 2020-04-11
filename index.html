@@ -9,11 +9,16 @@
 
 </head>
 
+<div id="alertshader">
+	<div id="alert">
+		<span id="alertmessage"></span>
+	</div>
+</div>
+
 <body>
 	<div id="main">
 		<h1>Sudoku</h1>
 		<h2 id="timer"><time>00:00:00</time></h2>
-		<h2 id="invalidmessage" class="hide">Not all entires are valid.</h2>
 		<div id="difficultySelect">
 			<input type="radio" id="Easy" name="difficulty" value="easy">
 			<label for="Easy">Easy</label><br>
@@ -25,9 +30,7 @@
 			<label for="Insane">Insane</label>
 		</div>
 		<div id="boards">
-			<div>
-				<div id="sudoku"></div>
-			</div>
+			<div id="sudoku"></div>
 		</div>
 		<div id="menu">
 			<div id="btns">
@@ -46,10 +49,10 @@
 					Solver!</a>
 			</div>
 		</div>
-		<script type="text/javascript" src="sudoku.js"></script>
 		<p id="updateText">Last Updated: April 11, 2020</p>
 	</div>
 </body>
+<script type="text/javascript" src="sudoku.js"></script>
 
 
 </html>

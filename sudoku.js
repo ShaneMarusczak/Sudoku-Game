@@ -1,6 +1,7 @@
 "use strict";
 
 (() => {
+
 	//#region variables
 	var runningTimer;
 	const rows = 9;
@@ -27,8 +28,17 @@
 	//#endregion
 
 	//#region functions
+	const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-	const add = () => {
+	const alertModalControl = (message, duration) => {
+		document.getElementById("alertshader").style.display = "block";
+		document.getElementById("alertmessage").innerText = message;
+		sleep(duration).then(() => {
+			document.getElementById("alertshader").style.display = "none";
+		});
+	};
+
+	const timerTick = () => {
 		seconds++;
 		if (seconds >= 60) {
 			seconds = 0;
@@ -39,13 +49,13 @@
 			}
 		}
 		timer.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
-							(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
-							(seconds > 9 ? seconds : "0" + seconds);
+			(minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
+			(seconds > 9 ? seconds : "0" + seconds);
 		timerStart();
 	};
 
 	const timerStart = () => {
-		runningTimer = setTimeout(add, 1000);
+		runningTimer = setTimeout(timerTick, 1000);
 	};
 
 	//inclusive
@@ -56,7 +66,7 @@
 		difficulty = Array.from(document.getElementsByName("difficulty")).find(input => input.checked);
 
 		if (typeof difficulty === "undefined") {
-			alert("Please select a difficulty.");
+			alertModalControl("Please select a difficulty.", 1500);
 			return;
 		}
 		generateRandomBoard();
@@ -73,7 +83,7 @@
 
 	const checkAnswer = () => {
 		if (!validate()) {
-			alert("Not all entries are valid!");
+			alertModalControl("Not all entries are valid!", 1500);
 			return;
 		}
 		for (let y = 0; y < rows; y++) {
@@ -82,32 +92,30 @@
 			}
 		}
 		if (!validBoard(answerBoard)) {
-			alert("Sorry, incorrect!");
+			alertModalControl("Sorry, incorrect!", 1500);
 			return;
 		}
 		clearTimeout(runningTimer);
-		alert("Correct!");
+		alertModalControl("Correct!", 1500);
 	};
 
 	const validate = () => {
-		var rv = true;
 		const validValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
-				document.getElementById("s" + y + x).style.backgroundColor = "aliceblue";
 				if (!validValues.includes(document.getElementById("s" + y + x).value)) {
-					document.getElementById("s" + y + x).style.backgroundColor = "red";
-					rv = false;
+					return false;
 				}
 			}
 		}
-		return rv;
+		return true;
 	};
 
 	const validBoard = (board) => {
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
 				if (!possible(y, x, board[y][x], board, true)) {
+					document.getElementById("s" + y + x).style.backgroundColor = "red";
 					return false;
 				}
 			}
