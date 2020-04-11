@@ -15,6 +15,7 @@
 	let hours = 0;
 	var board = [];
 	const copiedBoard = [];
+	const answerBoard = [];
 	let difficulty;
 	let solved = false;
 	const difficultySettings = {
@@ -77,11 +78,12 @@
 		}
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
-				if (document.getElementById("s" + y + x).value !== copiedBoard[y][x]) {
-					alert("Sorry, incorrect!");
-					return;
-				}
+				answerBoard[y][x] = document.getElementById("s" + y + x).value;
 			}
+		}
+		if (!validBoard(answerBoard)) {
+			alert("Sorry, incorrect!");
+			return;
 		}
 		clearTimeout(runningTimer);
 		alert("Correct!");
@@ -102,6 +104,17 @@
 		return rv;
 	};
 
+	const validBoard = (board) => {
+		for (let y = 0; y < rows; y++) {
+			for (let x = 0; x < cols; x++) {
+				if (!possible(y, x, board[y][x], board, true)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	};
+
 	const solve = () => {
 		if (solved) {
 			return;
@@ -113,7 +126,7 @@
 						if (solved) {
 							return;
 						}
-						if (possible(y, x, n)) {
+						if (possible(y, x, n, board, false)) {
 							board[y][x] = n;
 							solve();
 							board[y][x] = "";
@@ -124,38 +137,61 @@
 			}
 		}
 		solved = true;
-		copyBoard(board);
+		copyBoard(board, copiedBoard);
 	};
 
-	const copyBoard = (board) => {
+	const copyBoard = (boardFrom, boardTo) => {
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
-				copiedBoard[y][x] = board[y][x];
+				boardTo[y][x] = boardFrom[y][x];
 			}
 		}
 	};
 
-	const possible = (y, x, n) => {
-		for (let i = 0; i < 9; i++) {
-			if (board[y][i] == n) {
-				return false;
-			}
-		}
-		for (let i = 0; i < 9; i++) {
-			if (board[i][x] == n) {
-				return false;
-			}
-		}
-		const x0 = Math.floor(x / 3) * 3;
-		const y0 = Math.floor(y / 3) * 3;
-		for (let i = 0; i < 3; i++) {
-			for (let j = 0; j < 3; j++) {
-				if (board[y0 + i][x0 + j] == n) {
+	const possible = (y, x, n, boardArg, checkingMode) => {
+		if (checkingMode) {
+			for (let i = 0; i < 9; i++) {
+				if (boardArg[y][i] == n && i != x) {
 					return false;
 				}
 			}
+			for (let i = 0; i < 9; i++) {
+				if (boardArg[i][x] == n && i != y) {
+					return false;
+				}
+			}
+			const x0 = Math.floor(x / 3) * 3;
+			const y0 = Math.floor(y / 3) * 3;
+			for (let i = 0; i < 3; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (boardArg[y0 + i][x0 + j] == n && y0 + i != y && x0 + j != x) {
+						return false;
+					}
+				}
+			}
+			return true;
+		} else {
+			for (let i = 0; i < 9; i++) {
+				if (boardArg[y][i] == n) {
+					return false;
+				}
+			}
+			for (let i = 0; i < 9; i++) {
+				if (boardArg[i][x] == n) {
+					return false;
+				}
+			}
+			const x0 = Math.floor(x / 3) * 3;
+			const y0 = Math.floor(y / 3) * 3;
+			for (let i = 0; i < 3; i++) {
+				for (let j = 0; j < 3; j++) {
+					if (boardArg[y0 + i][x0 + j] == n) {
+						return false;
+					}
+				}
+			}
+			return true;
 		}
-		return true;
 	};
 
 	const generateRandomBoard = () => {
@@ -188,9 +224,11 @@
 	for (let i = 0; i < rows; i++) {
 		board.push([]);
 		copiedBoard.push([]);
+		answerBoard.push([]);
 		const entryRow = document.createElement("div");
 		boardUI.appendChild(entryRow);
 		for (let j = 0; j < cols; j++) {
+			answerBoard[i][j] = "";
 			board[i][j] = "";
 			copiedBoard[i][j] = "";
 			const entry = document.createElement("input");
