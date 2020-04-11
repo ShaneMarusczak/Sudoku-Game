@@ -241,7 +241,7 @@
 	};
 
 	const disableRadios = () => {
-		const radios = document.querySelectorAll(".radio");
+		const radios = document.querySelectorAll(".difficultRadio");
 		for (const radio of radios) {
 			radio.disabled = true;
 		}
