@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css?family=Orbitron&display=swap");
+
+
+html {
+	background-color: cornsilk;
+	font-family: "Orbitron", sans-serif;
+}
+
+h1 {
+	font-size: 4vh;
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+body {
+	margin-left: 10vw;
+	margin-top: 5vh;
+}
+
+#dificultySelect {
+	display: flex;
+}
+
+#s02,#s12,#s22,#s32,
+#s42,#s52,#s62,#s72,
+#s82, #s05, #s15, #s25,
+#s35, #s45, #s55, #s65,
+#s75, #s85,
+#a02,#a12,#a22,#a32,
+#a42,#a52,#a62,#a72,
+#a82, #a05, #a15, #a25,
+#a35, #a45, #a55, #a65,
+#a75, #a85 {
+	border-right: 4px solid black;
+}
+
+#s20,#s21,#s22,#s23,
+#s24,#s25,#s26,#s27,
+#s28, #s50, #s51, #s52,
+#s53, #s54, #s55, #s56,
+#s57, #s58,
+#a20,#a21,#a22,#a23,
+#a24,#a25,#a26,#a27,
+#a28, #a50, #a51, #a52,
+#a53, #a54, #a55, #a56,
+#a57, #a58 {
+	border-bottom: 4px solid black;
+}
+
+#sudoku,
+#solution {
+	display: grid;
+	margin-right: 30px;
+}
+
+.hovered {
+	background-color: rgb(159, 205, 243);
+}
+
+#sudoku > div > input:focus,
+#sudoku > div > input:hover {
+	background-color: rgb(159, 205, 243) !important;
+}
+
+button {
+	margin-top: 25px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	font-family: "Orbitron", sans-serif;
+	font-size: x-large;
+	width: 150px;
+	height: 75px;
+}
+
+#boards {
+	display: flex;
+	flex-direction: row;
+}
+
+@media screen and (max-width: 1427px) {
+	#sudoku > div,
+	#solution > div {
+		display: flex;
+	}
+	#boards {
+		flex-direction: column;
+	}
+}
+
+#sudoku > div > input {
+	border: 1px solid black;
+	width: 2em;
+	height: 2em;
+	text-align: center;
+	font-size: xx-large;
+	background-color: aliceblue;
+}
+
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
+#invalidmessage {
+	color: red;
+}
+
+a:hover {
+	color:cadetblue;
+}
+
+#updateText {
+	font-size: small;
+	margin-top: 10px;
+}
+
+button:hover {
+	cursor: pointer;
+	background-color: #ddd;
+}

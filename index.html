@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sudoku Solver</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+
+</head>
+
+<body>
+	<div id="main">
+		<h1>Sudoku</h1>
+		<h2 id="timer"><time>00:00:00</time></h2>
+		<h2 id="invalidmessage" class="hide">Not all entires are valid.</h2>
+		<div id="dificultySelect">
+			<input type="radio" id="Easy" name="dificulty" value="easy">
+			<label for="male">Easy</label><br>
+			<input type="radio" id="Medium" name="dificulty" value="medium">
+			<label for="female">Medium</label><br>
+			<input type="radio" id="Hard" name="dificulty" value="hard">
+			<label for="other">Hard</label>
+		</div>
+		<div id="boards">
+			<div>
+				<div id="sudoku"></div>
+			</div>
+		</div>
+		<div id="menu">
+			<div id="btns">
+				<button id="start">Start Game</button>
+				<button id="finish">Check Answer</button>
+			</div>
+			<div id="links">
+				<a id="gitHubLink" href="https://github.com/ShaneMarusczak/Sudoku-Solver" target="_blank">Github
+					Repo</a>
+				<br />
+				<a id="analysisLink" href="https://marusczak.com/Battleship-JS" target="_blank">Try out my Battleship
+					Game!</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="sudoku.js"></script>
+		<p id="updateText">Last Updated: April 11, 2020</p>
+	</div>
+</body>
+
+
+</html>
