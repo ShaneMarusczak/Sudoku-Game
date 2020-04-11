@@ -8,7 +8,7 @@
 	const boardUI = document.getElementById("sudoku");
 	const startBtn = document.getElementById("start");
 	const startOverBtn = document.getElementById("startover");
-	const finishButton = document.getElementById("finish");
+	const checkAnswerButton = document.getElementById("checkAnswer");
 	const timer = document.getElementById("timer");
 	let seconds = 0;
 	let minutes = 0;
@@ -71,7 +71,7 @@
 		timerStart();
 	};
 
-	const finish = () => {
+	const checkAnswer = () => {
 		if (!validate()) {
 			alert("Not all entries are valid!");
 			return;
@@ -213,8 +213,8 @@
 		start();
 	});
 
-	finishButton.addEventListener("click", () => {
-		finish();
+	checkAnswerButton.addEventListener("click", () => {
+		checkAnswer();
 	});
 
 	startOverBtn.addEventListener("click", () => location.reload());
