@@ -53,7 +53,7 @@
 		solved = false;
 		dificulty = Array.from(document.getElementsByName("dificulty")).find(input => input.checked);
 
-		if (dificulty === undefined) {
+		if (typeof dificulty === "undefined") {
 			alert("Please select a dificulty.");
 			return;
 		}
