@@ -6,6 +6,7 @@
 	const cols = 9;
 	const boardUI = document.getElementById("sudoku");
 	const startBtn = document.getElementById("start");
+	const startOverBtn = document.getElementById("startover");
 	const finishButton = document.getElementById("finish");
 	const timer = document.getElementById("timer");
 	let seconds = 0;
@@ -155,25 +156,6 @@
 		return true;
 	};
 
-	const clearEntries = () => {
-		for (let y = 0; y < rows; y++) {
-			for (let x = 0; x < cols; x++) {
-				document.getElementById("s" + y + x).value = "";
-				board[x][y] = "";
-			}
-		}
-	};
-
-	const clearAnswers = () => {
-		for (let y = 0; y < rows; y++) {
-			for (let x = 0; x < cols; x++) {
-				document.getElementById("a" + y + x).value = "";
-				document.getElementById("a" + y + x).style.color = "black";
-				board[x][y] = "";
-			}
-		}
-	};
-
 	const generateRandomBoard = () => {
 		board[0][0] = randomIntFromInterval(1, 9);
 		board[1][7] = randomIntFromInterval(1, 9);
@@ -196,6 +178,8 @@
 	finishButton.addEventListener("click", () => {
 		finish();
 	});
+
+	startOverBtn.addEventListener("click", () => location.reload());
 	//#endregion
 
 	//#region page setup
