@@ -115,7 +115,6 @@
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
 				if (!possible(y, x, board[y][x], board, true)) {
-					document.getElementById("s" + y + x).style.backgroundColor = "red";
 					return false;
 				}
 			}
