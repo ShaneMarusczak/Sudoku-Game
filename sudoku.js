@@ -3,12 +3,14 @@
 (() => {
 
 	//#region variables
+	let numberOfHints = 0;
 	var runningTimer;
 	const rows = 9;
 	const cols = 9;
 	const boardUI = document.getElementById("sudoku");
 	const startBtn = document.getElementById("start");
 	const startOverBtn = document.getElementById("startover");
+	const hintBtn = document.getElementById("hint");
 	const checkAnswerButton = document.getElementById("checkAnswer");
 	const timer = document.getElementById("timer");
 	let seconds = 0;
@@ -19,6 +21,7 @@
 	const answerBoard = [];
 	let difficulty;
 	let solved = false;
+	let gameStarted = false;
 	const difficultySettings = {
 		"easy": 1,
 		"hard": 3,
@@ -28,6 +31,21 @@
 	//#endregion
 
 	//#region functions
+	const giveHint = () => {
+		if (numberOfHints <= 6 - difficultySettings[difficulty.value]) {
+			const x = randomIntFromInterval(0, 8);
+			const y = randomIntFromInterval(0, 8);
+			if (document.getElementById("s" + y + x).value === "") {
+				document.getElementById("s" + y + x).value = copiedBoard[y][x];
+				numberOfHints++;
+			} else {
+				giveHint();
+			}
+		} else {
+			alertModalControl("Out of hints!", 1500);
+		}
+	};
+
 	const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	const alertModalControl = (message, duration) => {
@@ -62,6 +80,10 @@
 	const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 	const start = () => {
+		if (gameStarted) {
+			return;
+		}
+		gameStarted = true;
 		solved = false;
 		difficulty = Array.from(document.getElementsByName("difficulty")).find(input => input.checked);
 
@@ -78,6 +100,7 @@
 				}
 			}
 		}
+		hintBtn.classList.remove("hide");
 		timer.classList.remove("hide");
 		timerStart();
 	};
@@ -223,6 +246,10 @@
 
 	checkAnswerButton.addEventListener("click", () => {
 		checkAnswer();
+	});
+
+	hintBtn.addEventListener("click", () => {
+		giveHint();
 	});
 
 	startOverBtn.addEventListener("click", () => location.reload());
