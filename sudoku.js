@@ -100,12 +100,11 @@
 				}
 			}
 		}
-		solved = false;
 		gameStarted = true;
 		hintBtn.classList.remove("hide");
 		timer.classList.remove("hide");
 		timerStart();
-		disableRadios();
+		disableDifficultyRadios();
 	};
 
 	const checkAnswer = () => {
@@ -186,49 +185,35 @@
 	};
 
 	const possible = (y, x, n, boardArg, checkingMode) => {
-		if (checkingMode) {
-			for (let i = 0; i < 9; i++) {
-				if (boardArg[y][i] == n && i != x) {
-					return false;
+		for (let i = 0; i < 9; i++) {
+			if (boardArg[y][i] == n) {
+				if (i == x && checkingMode) {
+					continue;
 				}
+				return false;
 			}
-			for (let i = 0; i < 9; i++) {
-				if (boardArg[i][x] == n && i != y) {
-					return false;
-				}
-			}
-			const x0 = Math.floor(x / 3) * 3;
-			const y0 = Math.floor(y / 3) * 3;
-			for (let i = 0; i < 3; i++) {
-				for (let j = 0; j < 3; j++) {
-					if (boardArg[y0 + i][x0 + j] == n && y0 + i != y && x0 + j != x) {
-						return false;
-					}
-				}
-			}
-			return true;
-		} else {
-			for (let i = 0; i < 9; i++) {
-				if (boardArg[y][i] == n) {
-					return false;
-				}
-			}
-			for (let i = 0; i < 9; i++) {
-				if (boardArg[i][x] == n) {
-					return false;
-				}
-			}
-			const x0 = Math.floor(x / 3) * 3;
-			const y0 = Math.floor(y / 3) * 3;
-			for (let i = 0; i < 3; i++) {
-				for (let j = 0; j < 3; j++) {
-					if (boardArg[y0 + i][x0 + j] == n) {
-						return false;
-					}
-				}
-			}
-			return true;
 		}
+		for (let i = 0; i < 9; i++) {
+			if (boardArg[i][x] == n) {
+				if (i == y && checkingMode) {
+					continue;
+				}
+				return false;
+			}
+		}
+		const x0 = Math.floor(x / 3) * 3;
+		const y0 = Math.floor(y / 3) * 3;
+		for (let i = 0; i < 3; i++) {
+			for (let j = 0; j < 3; j++) {
+				if (boardArg[y0 + i][x0 + j] == n) {
+					if (y0 + i == y && x0 + j == x && checkingMode) {
+						continue;
+					}
+					return false;
+				}
+			}
+		}
+		return true;
 	};
 
 	const generateRandomBoard = () => {
@@ -244,11 +229,10 @@
 		solve();
 	};
 
-	const disableRadios = () => {
-		const radios = document.querySelectorAll(".difficultRadio");
-		for (const radio of radios) {
-			radio.disabled = true;
-		}
+	const disableDifficultyRadios = () => {
+		document.getElementsByName("difficulty").forEach(r => {
+			r.disabled = true;
+		});
 	};
 	//#endregion
 
