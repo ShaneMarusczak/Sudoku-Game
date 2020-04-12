@@ -249,17 +249,11 @@
 	//#endregion
 
 	//#region event listeners
-	startBtn.addEventListener("click", () => {
-		start();
-	});
+	startBtn.addEventListener("click", () => start());
 
-	checkAnswerButton.addEventListener("click", () => {
-		checkAnswer();
-	});
+	checkAnswerButton.addEventListener("click", () => checkAnswer());
 
-	hintBtn.addEventListener("click", () => {
-		giveHint();
-	});
+	hintBtn.addEventListener("click", () => giveHint());
 
 	startOverBtn.addEventListener("click", () => location.reload());
 	//#endregion
