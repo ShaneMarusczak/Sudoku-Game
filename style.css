@@ -119,7 +119,6 @@ button:hover {
 
 #alertshader {
 	z-index: 1;
-	display: none;
 	position: fixed;
 	padding: 0;
 	margin: 0;

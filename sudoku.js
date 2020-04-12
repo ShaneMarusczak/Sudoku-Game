@@ -49,10 +49,10 @@
 	const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	const alertModalControl = (message, duration) => {
-		document.getElementById("alertshader").style.display = "block";
+		document.getElementById("alertshader").classList.remove("hide");
 		document.getElementById("alertmessage").innerText = message;
 		sleep(duration).then(() => {
-			document.getElementById("alertshader").style.display = "none";
+			document.getElementById("alertshader").classList.add("hide");
 		});
 	};
 
