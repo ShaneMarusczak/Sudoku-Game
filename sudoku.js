@@ -93,6 +93,7 @@
 		generateRandomBoard();
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
+				document.getElementById("s" + y + x).readOnly = false;
 				if (randomIntFromInterval(0, difficultySettings[difficulty.value]) === 0) {
 					document.getElementById("s" + y + x).value = copiedBoard[y][x];
 					document.getElementById("s" + y + x).readOnly = true;
@@ -273,8 +274,9 @@
 			board[i][j] = "";
 			copiedBoard[i][j] = "";
 			const entry = document.createElement("input");
-			entryRow.appendChild(entry);
 			entry.id = "s" + i + j;
+			entry.readOnly = true;
+			entryRow.appendChild(entry);
 		}
 	}
 	//#endregion
