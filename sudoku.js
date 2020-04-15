@@ -247,14 +247,21 @@
 		const noteElem = document.getElementById("n" + e.target.id.substring(2));
 		if (noteElem.classList.contains("hide") && gameStarted && document.getElementById("s" + e.target.id.substring(2)).readOnly !== true) {
 			noteElem.classList.remove("hide");
+			document.getElementById("no" + e.target.id.substring(2)).innerHTML = "«";
+
 		} else {
 			noteElem.classList.add("hide");
+			document.getElementById("no" + e.target.id.substring(2)).innerHTML = "»";
+
 		}
 	};
 
 	const hideNotes = (e) => {
 		if (e.target.tagName !== "TEXTAREA" && e.target.tagName !== "INPUT" && e.target.tagName !== "SPAN") {
 			Array.from(document.getElementsByTagName("textarea")).forEach(elem => elem.classList.add("hide"));
+			Array.from(document.getElementsByTagName("span")).forEach(elem => {
+				elem.innerHTML = "»";
+			});
 		}
 	};
 
@@ -266,6 +273,7 @@
 
 	const noteOpenButtonHide = (e) => {
 		document.getElementById("no" + e.target.id.substring(2)).classList.remove("opaque");
+
 	};
 	//#endregion
 
@@ -297,7 +305,7 @@
 			const note = document.createElement("textarea");
 			const noteOpen = document.createElement("span");
 			const noteOpenDiv = document.createElement("div");
-			noteOpen.innerHTML = "v";
+			noteOpen.innerHTML = "»";
 			noteOpen.classList.add("hide");
 			note.classList.add("hide");
 			entryDiv.id = "ed" + i + j;
