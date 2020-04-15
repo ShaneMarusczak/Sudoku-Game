@@ -82,7 +82,6 @@ button {
 
 .hide {
 	display: none;
-	transition: 1s all;
 }
 
 a:hover {
@@ -138,6 +137,10 @@ textarea {
 	z-index: 3;
 }
 
+.opaque {
+	opacity: 1 !important;
+}
+
 .entryDiv {
 	display: grid;
 }
@@ -158,5 +161,7 @@ textarea {
 
 .noteOpenDiv > span {
 	z-index: 2;
+	opacity: 0;
 	position: absolute;
+	transition: opacity 150ms;
 }

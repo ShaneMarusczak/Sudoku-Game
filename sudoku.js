@@ -257,12 +257,12 @@
 
 	const noteOpenButtonShow = (e) => {
 		if (gameStarted && e.target.tagName !== "SPAN" && document.getElementById("s" + e.target.id.substring(1)).readOnly !== true) {
-			document.getElementById("no" + e.target.id.substring(1)).classList.remove("hide");
+			document.getElementById("no" + e.target.id.substring(1)).classList.add("opaque");
 		}
 	};
 
 	const noteOpenButtonHide = (e) => {
-		document.getElementById("no" + e.target.id.substring(2)).classList.add("hide");
+		document.getElementById("no" + e.target.id.substring(2)).classList.remove("opaque");
 	};
 	//#endregion
 
@@ -295,7 +295,7 @@
 			const noteOpen = document.createElement("span");
 			const noteOpenDiv = document.createElement("div");
 			noteOpen.innerHTML = "?";
-			noteOpen.classList.add("hide");
+			// noteOpen.classList.add("hide");
 			note.classList.add("hide");
 			entryDiv.id = "ed" + i + j;
 			note.id = "n" + i + j;
