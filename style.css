@@ -165,3 +165,7 @@ textarea {
 	position: absolute;
 	transition: opacity 150ms;
 }
+
+.noteOpenDiv > span:hover {
+	cursor: pointer;
+}

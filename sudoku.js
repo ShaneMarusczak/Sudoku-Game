@@ -97,6 +97,9 @@
 				if (randomIntFromInterval(0, difficultySettings[difficulty.value]) === 0) {
 					document.getElementById("s" + y + x).value = copiedBoard[y][x];
 					document.getElementById("s" + y + x).readOnly = true;
+				} else {
+					document.getElementById("no" + y + x).classList.remove("hide");
+
 				}
 			}
 		}
@@ -295,7 +298,7 @@
 			const noteOpen = document.createElement("span");
 			const noteOpenDiv = document.createElement("div");
 			noteOpen.innerHTML = "?";
-			// noteOpen.classList.add("hide");
+			noteOpen.classList.add("hide");
 			note.classList.add("hide");
 			entryDiv.id = "ed" + i + j;
 			note.id = "n" + i + j;
