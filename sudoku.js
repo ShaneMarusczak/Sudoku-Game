@@ -260,7 +260,9 @@
 		if (e.target.tagName !== "TEXTAREA" && e.target.tagName !== "INPUT" && e.target.tagName !== "SPAN") {
 			Array.from(document.getElementsByTagName("textarea")).forEach(elem => elem.classList.add("hide"));
 			Array.from(document.getElementsByTagName("span")).forEach(elem => {
-				elem.innerHTML = "»";
+				if (elem.id !== "alertmessage") {
+					elem.innerHTML = "»";
+				}
 			});
 		}
 	};
