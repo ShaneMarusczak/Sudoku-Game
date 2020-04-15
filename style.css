@@ -47,17 +47,8 @@ body {
 	border-bottom: 4px solid black !important;
 }
 
-#sudoku {
-	display: grid;
-	margin-right: 30px;
-}
-
-.hovered {
-	background-color: rgb(159, 205, 243);
-}
-
-#sudoku > div > input:focus,
-#sudoku > div > input:hover {
+#sudoku > div > div > input:focus,
+#sudoku > div > div > input:hover {
 	background-color: rgb(159, 205, 243) !important;
 }
 
@@ -73,34 +64,25 @@ button {
 
 #boards {
 	display: flex;
-	flex-direction: row;
 }
 
-@media screen and (max-width: 1427px) {
-	#sudoku > div {
-		display: flex;
-	}
+#sudoku > div {
+	display: flex;
 }
 
-#sudoku > div > input {
+
+#sudoku > div > div > input {
 	border: 1px solid black;
-	width: 2em;
-	height: 2em;
+	width: 65px;
+	height: 65px;
 	text-align: center;
 	font-size: xx-large;
 	background-color: aliceblue;
 }
 
-.show {
-	display: block;
-}
-
 .hide {
 	display: none;
-}
-
-#invalidmessage {
-	color: red;
+	transition: 1s all;
 }
 
 a:hover {
@@ -118,7 +100,7 @@ button:hover {
 }
 
 #alertshader {
-	z-index: 1;
+	z-index: 98;
 	position: fixed;
 	padding: 0;
 	margin: 0;
@@ -130,6 +112,7 @@ button:hover {
 }
 
 #alert {
+	z-index: 99;
 	text-align: center;
 	border-radius: 5px;
 	box-shadow: inset 0px 0px 0px 4px black;
@@ -141,8 +124,39 @@ button:hover {
 }
 
 #alertmessage {
+	z-index: 99;
 	vertical-align: middle;
 	font-family: "Orbitron", sans-serif;
 	font-size: x-large;
 	line-height: 15vh;
+}
+
+textarea {
+	width: 50px;
+	height: 50px;
+	resize: none;
+	z-index: 3;
+}
+
+.entryDiv {
+	display: grid;
+}
+
+.noteOpenDiv {
+	margin-left:57px;
+}
+
+.entryDiv > input,
+.entryDiv > textarea,
+.entryDiv > div {
+	grid-column: 1;
+	grid-row: 1;
+}
+.entryDiv > input {
+	z-index: 1;
+}
+
+.noteOpenDiv > span {
+	z-index: 2;
+	position: absolute;
 }

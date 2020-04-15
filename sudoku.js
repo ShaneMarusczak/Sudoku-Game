@@ -101,6 +101,11 @@
 			}
 		}
 		gameStarted = true;
+		displayControl();
+	};
+
+	const displayControl = () => {
+		document.getElementById("introText").classList.add("hide");
 		hintBtn.classList.remove("hide");
 		timer.classList.remove("hide");
 		timerStart();
@@ -234,6 +239,31 @@
 			r.disabled = true;
 		});
 	};
+
+	const noteDisplayHandler = (e) => {
+		const noteElem = document.getElementById("n" + e.target.id.substring(2));
+		if (noteElem.classList.contains("hide") && gameStarted && document.getElementById("s" + e.target.id.substring(2)).readOnly !== true) {
+			noteElem.classList.remove("hide");
+		} else {
+			noteElem.classList.add("hide");
+		}
+	};
+
+	const hideNotes = (e) => {
+		if (e.target.tagName !== "TEXTAREA" && e.target.tagName !== "INPUT" && e.target.tagName !== "SPAN") {
+			Array.from(document.getElementsByTagName("textarea")).forEach(elem => elem.classList.add("hide"));
+		}
+	};
+
+	const noteOpenButtonShow = (e) => {
+		if (gameStarted && e.target.tagName !== "SPAN" && document.getElementById("s" + e.target.id.substring(1)).readOnly !== true) {
+			document.getElementById("no" + e.target.id.substring(1)).classList.remove("hide");
+		}
+	};
+
+	const noteOpenButtonHide = (e) => {
+		document.getElementById("no" + e.target.id.substring(2)).classList.add("hide");
+	};
 	//#endregion
 
 	//#region event listeners
@@ -244,6 +274,8 @@
 	hintBtn.addEventListener("click", giveHint);
 
 	startOverBtn.addEventListener("click", () => location.reload());
+
+	document.addEventListener("click", hideNotes);
 	//#endregion
 
 	//#region page setup
@@ -257,10 +289,29 @@
 			answerBoard[i][j] = "";
 			board[i][j] = "";
 			copiedBoard[i][j] = "";
+			const entryDiv = document.createElement("div");
 			const entry = document.createElement("input");
+			const note = document.createElement("textarea");
+			const noteOpen = document.createElement("span");
+			const noteOpenDiv = document.createElement("div");
+			noteOpen.innerHTML = "?";
+			noteOpen.classList.add("hide");
+			note.classList.add("hide");
+			entryDiv.id = "ed" + i + j;
+			note.id = "n" + i + j;
 			entry.id = "s" + i + j;
+			noteOpen.id = "no" + i + j;
 			entry.readOnly = true;
-			entryRow.appendChild(entry);
+			entryDiv.classList.add("entryDiv");
+			noteOpenDiv.classList.add("noteOpenDiv");
+			entryDiv.addEventListener("mouseover", noteOpenButtonShow);
+			entryDiv.addEventListener("mouseleave", noteOpenButtonHide);
+			entryDiv.appendChild(entry);
+			entryDiv.appendChild(note);
+			noteOpenDiv.appendChild(noteOpen);
+			entryDiv.appendChild(noteOpenDiv);
+			noteOpen.addEventListener("click", noteDisplayHandler);
+			entryRow.appendChild(entryDiv);
 		}
 	}
 	//#endregion
