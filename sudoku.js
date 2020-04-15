@@ -297,7 +297,7 @@
 			const note = document.createElement("textarea");
 			const noteOpen = document.createElement("span");
 			const noteOpenDiv = document.createElement("div");
-			noteOpen.innerHTML = "?";
+			noteOpen.innerHTML = "v";
 			noteOpen.classList.add("hide");
 			note.classList.add("hide");
 			entryDiv.id = "ed" + i + j;
