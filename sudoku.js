@@ -3,14 +3,12 @@
 (() => {
 
 	//#region variables
-	let numberOfHints = 0;
 	var runningTimer;
 	const rows = 9;
 	const cols = 9;
 	const boardUI = document.getElementById("sudoku");
 	const startBtn = document.getElementById("start");
 	const startOverBtn = document.getElementById("startover");
-	const hintBtn = document.getElementById("hint");
 	const checkAnswerButton = document.getElementById("checkAnswer");
 	const timer = document.getElementById("timer");
 	let seconds = 0;
@@ -19,6 +17,7 @@
 	var board = [];
 	const copiedBoard = [];
 	const answerBoard = [];
+	const hintBoard = [];
 	let difficulty;
 	let solved = false;
 	let gameStarted = false;
@@ -31,21 +30,6 @@
 	//#endregion
 
 	//#region functions
-	const giveHint = () => {
-		if (numberOfHints <= 6 - difficultySettings[difficulty.value]) {
-			const x = randomIntFromInterval(0, 8);
-			const y = randomIntFromInterval(0, 8);
-			if (document.getElementById("s" + y + x).value === "") {
-				document.getElementById("s" + y + x).value = copiedBoard[y][x];
-				numberOfHints++;
-			} else {
-				giveHint();
-			}
-		} else {
-			alertModalControl("Out of hints!", 1500);
-		}
-	};
-
 	const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	const alertModalControl = (message, duration) => {
@@ -109,7 +93,6 @@
 
 	const displayControl = () => {
 		document.getElementById("introText").classList.add("hide");
-		// hintBtn.classList.remove("hide");
 		timer.classList.remove("hide");
 		timerStart();
 		disableDifficultyRadios();
@@ -159,7 +142,7 @@
 		return true;
 	};
 
-	const solve = () => {
+	const solve = (copyTo) => {
 		if (solved) {
 			return;
 		}
@@ -172,7 +155,7 @@
 						}
 						if (possible(y, x, n, board, false)) {
 							board[y][x] = n;
-							solve();
+							solve(copyTo);
 							board[y][x] = "";
 						}
 					}
@@ -181,7 +164,7 @@
 			}
 		}
 		solved = true;
-		copyBoard(board, copiedBoard);
+		copyBoard(board, copyTo);
 	};
 
 	const copyBoard = (boardFrom, boardTo) => {
@@ -234,7 +217,7 @@
 		board[6][6] = randomIntFromInterval(1, 9);
 		board[7][2] = randomIntFromInterval(1, 9);
 		board[8][5] = randomIntFromInterval(1, 9);
-		solve();
+		solve(copiedBoard);
 	};
 
 	const disableDifficultyRadios = () => {
@@ -287,8 +270,6 @@
 
 	checkAnswerButton.addEventListener("click", checkAnswer);
 
-	// hintBtn.addEventListener("click", giveHint);
-
 	startOverBtn.addEventListener("click", () => location.reload());
 
 	document.addEventListener("click", hideNotes);
@@ -299,11 +280,13 @@
 		board.push([]);
 		copiedBoard.push([]);
 		answerBoard.push([]);
+		hintBoard.push([]);
 		const entryRow = document.createElement("div");
 		boardUI.appendChild(entryRow);
 		for (let j = 0; j < cols; j++) {
 			answerBoard[i][j] = "";
 			board[i][j] = "";
+			hintBoard[i][j] = "";
 			copiedBoard[i][j] = "";
 			const entryDiv = document.createElement("div");
 			const entry = document.createElement("input");

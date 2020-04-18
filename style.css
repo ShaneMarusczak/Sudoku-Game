@@ -162,6 +162,7 @@ textarea {
 	grid-column: 1;
 	grid-row: 1;
 }
+
 .entryDiv > input {
 	z-index: 1;
 }
