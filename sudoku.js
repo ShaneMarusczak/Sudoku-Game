@@ -116,7 +116,16 @@
 		clearTimeout(runningTimer);
 		alertModalControl("Correct!", 1500);
 		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 4000));
+		boardtoGreen();
 		gameOver = true;
+	};
+
+	const boardtoGreen = () => {
+		for (let y = 0; y < rows; y++) {
+			for (let x = 0; x < cols; x++) {
+				document.getElementById("s" + y + x).style.background = "darkseagreen";
+			}
+		}
 	};
 
 	const validate = () => {
