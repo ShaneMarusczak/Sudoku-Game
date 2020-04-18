@@ -1,7 +1,5 @@
 "use strict";
-
 (() => {
-
 	//#region variables
 	var runningTimer;
 	const rows = 9;
@@ -220,12 +218,10 @@
 	};
 
 	const disableDifficultyRadios = () => {
-		document.getElementsByName("difficulty").forEach(r => {
+		Array.from(document.getElementsByName("difficulty")).forEach(r => {
 			r.disabled = true;
 		});
-		Array.from(document.getElementsByTagName("label")).forEach(r => {
-			r.classList.add("noHover");
-		});
+		Array.from(document.getElementsByTagName("label")).forEach(r => r.classList.add("noHover"));
 	};
 
 	const noteDisplayHandler = (e) => {
