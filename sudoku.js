@@ -241,6 +241,9 @@
 		document.getElementsByName("difficulty").forEach(r => {
 			r.disabled = true;
 		});
+		Array.from(document.getElementsByTagName("label")).forEach(r => {
+			r.classList.add("noHover");
+		});
 	};
 
 	const noteDisplayHandler = (e) => {

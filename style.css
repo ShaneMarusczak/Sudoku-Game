@@ -22,13 +22,20 @@ body {
 	margin-bottom: 15px;
 }
 
-#difficultySelect > label {
+label {
 	font-size: x-large;
+	padding-left: 5px;
 }
 
-#difficultySelect > input {
+input[type="radio"] {
+	margin-right: 0;
+	margin-left: 20px;
 	width: 25px;
 	height: 25px;
+}
+
+.firstButton {
+	margin-left: 0 !important;
 }
 
 #s02,#s12,#s22,#s32,
@@ -168,4 +175,8 @@ textarea {
 
 .noteOpenDiv > span:hover {
 	cursor: pointer;
+}
+
+input[type="radio"]:hover + label:not(.noHover){
+	color: cadetblue;
 }
