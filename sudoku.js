@@ -109,7 +109,7 @@
 
 	const displayControl = () => {
 		document.getElementById("introText").classList.add("hide");
-		hintBtn.classList.remove("hide");
+		// hintBtn.classList.remove("hide");
 		timer.classList.remove("hide");
 		timerStart();
 		disableDifficultyRadios();
@@ -287,7 +287,7 @@
 
 	checkAnswerButton.addEventListener("click", checkAnswer);
 
-	hintBtn.addEventListener("click", giveHint);
+	// hintBtn.addEventListener("click", giveHint);
 
 	startOverBtn.addEventListener("click", () => location.reload());
 
