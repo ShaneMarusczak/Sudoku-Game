@@ -114,6 +114,7 @@
 		}
 		clearTimeout(runningTimer);
 		alertModalControl("Correct!", 1500);
+		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 4000));
 	};
 
 	const validate = () => {
