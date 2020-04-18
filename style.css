@@ -25,37 +25,25 @@ body {
 label {
 	font-size: x-large;
 	padding-left: 5px;
+	margin-right: 20px;
 }
 
 input[type="radio"] {
 	margin-right: 0;
-	margin-left: 20px;
 	width: 25px;
 	height: 25px;
 }
 
-.firstButton {
-	margin-left: 0 !important;
-}
-
-#s02,#s12,#s22,#s32,
-#s42,#s52,#s62,#s72,
-#s82, #s05, #s15, #s25,
-#s35, #s45, #s55, #s65,
-#s75, #s85 {
+.rightBorder {
 	border-right: 4px solid black !important;
 }
 
-#s20,#s21,#s22,#s23,
-#s24,#s25,#s26,#s27,
-#s28, #s50, #s51, #s52,
-#s53, #s54, #s55, #s56,
-#s57, #s58 {
+.bottomBorder {
 	border-bottom: 4px solid black !important;
 }
 
-#sudoku > div > div > input:focus,
-#sudoku > div > div > input:hover {
+input[type="text"]:focus,
+input[type="text"]:hover {
 	background-color: rgb(159, 205, 243) !important;
 }
 
@@ -69,16 +57,11 @@ button {
 	height: 75px;
 }
 
-#boards {
+.entryRow {
 	display: flex;
 }
 
-#sudoku > div {
-	display: flex;
-}
-
-
-#sudoku > div > div > input {
+input[type="text"] {
 	border: 1px solid black;
 	width: 65px;
 	height: 65px;
@@ -92,7 +75,7 @@ button {
 }
 
 a:hover {
-	color:cadetblue;
+	color: cadetblue;
 }
 
 #updateText {
@@ -126,7 +109,7 @@ button:hover {
 	margin-top: 10vh;
 	background-color: azure;
 	width: 20vw;
-	height:15vh;
+	height: 15vh;
 }
 
 #alertmessage {
@@ -153,31 +136,35 @@ textarea {
 }
 
 .noteOpenDiv {
-	margin-left:57px;
+	margin-left: 57px;
 }
 
-.entryDiv > input,
-.entryDiv > textarea,
-.entryDiv > div {
+input[type="text"],
+textarea,
+.noteOpenDiv {
 	grid-column: 1;
 	grid-row: 1;
 }
 
-.entryDiv > input {
-	z-index: 1;
-}
-
-.noteOpenDiv > span {
+span:not(#alertmessage) {
 	z-index: 2;
 	opacity: 0;
 	position: absolute;
 	transition: opacity 150ms;
 }
 
-.noteOpenDiv > span:hover {
+span:not(#alertmessage):hover {
 	cursor: pointer;
 }
 
-input[type="radio"]:hover + label:not(.noHover){
+input[type="radio"]:hover+label:not(.noHover) {
 	color: cadetblue;
+}
+
+#links {
+	display: inline-block;
+}
+
+.link {
+	display: table;
 }

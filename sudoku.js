@@ -276,6 +276,7 @@
 		copiedBoard.push([]);
 		answerBoard.push([]);
 		const entryRow = document.createElement("div");
+		entryRow.classList.add("entryRow");
 		boardUI.appendChild(entryRow);
 		for (let j = 0; j < cols; j++) {
 			answerBoard[i][j] = "";
@@ -294,6 +295,7 @@
 			entry.id = "s" + i + j;
 			noteOpen.id = "no" + i + j;
 			entry.readOnly = true;
+			entry.type = "text";
 			entryDiv.classList.add("entryDiv");
 			noteOpenDiv.classList.add("noteOpenDiv");
 			entryDiv.addEventListener("mouseover", noteOpenButtonShow);
@@ -304,6 +306,12 @@
 			entryDiv.appendChild(noteOpenDiv);
 			noteOpen.addEventListener("click", noteDisplayHandler);
 			entryRow.appendChild(entryDiv);
+			if (j === 2 || j === 5) {
+				entry.classList.add("rightBorder");
+			}
+			if (i === 2 || i === 5) {
+				entry.classList.add("bottomBorder");
+			}
 		}
 	}
 	//#endregion

@@ -16,44 +16,34 @@
 </div>
 
 <body>
-	<div id="main">
-		<h1>Sudoku</h1>
-		<h2 id="timer" class="hide"><time>00:00:00</time></h2>
-		<h3 id="introText">Select a difficulty then click Start Game to Begin!</h3>
-		<div id="difficultySelect">
-			<input type="radio" name="difficulty" value="easy" id="Easy" class="firstButton">
-			<label for="Easy">Easy</label>
-			<input type="radio" name="difficulty" value="medium" id="Medium">
-			<label for="Medium">Medium</label>
-			<input type="radio" name="difficulty" value="hard" id="Hard">
-			<label for="Hard">Hard</label>
-			<input type="radio" name="difficulty" value="insane" id="Insane">
-			<label for="Insane">Insane</label>
-		</div>
-		<div id="boards">
-			<div id="sudoku"></div>
-		</div>
-		<div id="menu">
-			<div id="btns">
-				<button id="start">Start Game</button>
-				<button id="checkAnswer">Check Answer</button>
-				<button id="startover">Start Over</button>
-			</div>
-			<div id="links">
-				<a id="gitHubLink" href="https://github.com/ShaneMarusczak/Sudoku-Game" target="_blank">Github
-					Repo</a>
-				<br />
-				<a id="analysisLink" href="https://marusczak.com/Battleship-JS">Try out my Battleship
-					Game!</a>
-				<br />
-				<a id="analysisLink" href="https://marusczak.com/Sudoku-Solver">Try out my Sudoku
-					Solver!</a>
-			</div>
-		</div>
-		<p id="updateText">Last Updated: April 15, 2020</p>
+	<h1>Sudoku</h1>
+	<h2 id="timer" class="hide"><time>00:00:00</time></h2>
+	<h3 id="introText">Select a difficulty then click Start Game to Begin!</h3>
+	<div id="difficultySelect">
+		<input type="radio" name="difficulty" value="easy" id="Easy">
+		<label for="Easy">Easy</label>
+		<input type="radio" name="difficulty" value="medium" id="Medium">
+		<label for="Medium">Medium</label>
+		<input type="radio" name="difficulty" value="hard" id="Hard">
+		<label for="Hard">Hard</label>
+		<input type="radio" name="difficulty" value="insane" id="Insane">
+		<label for="Insane">Insane</label>
 	</div>
+	<div id="sudoku"></div>
+	<div id="menu">
+		<div id="btns">
+			<button id="start">Start Game</button>
+			<button id="checkAnswer">Check Answer</button>
+			<button id="startover">Start Over</button>
+		</div>
+		<div id="links">
+			<a class="link" href="https://github.com/ShaneMarusczak/Sudoku-Game" target="_blank">Github Repo</a>
+			<a class="link" href="https://marusczak.com/Battleship-JS">Try out my Battleship Game!</a>
+			<a class="link" href="https://marusczak.com/Sudoku-Solver">Try out my Sudoku Solver!</a>
+		</div>
+	</div>
+	<p id="updateText">Last Updated: April 18, 2020</p>
 </body>
 <script type="text/javascript" src="sudoku.js"></script>
-
 
 </html>
