@@ -18,6 +18,7 @@
 	let difficulty;
 	let solved = false;
 	let gameStarted = false;
+	let gameOver = false;
 	const difficultySettings = {
 		"easy": 1,
 		"hard": 3,
@@ -96,7 +97,7 @@
 	};
 
 	const checkAnswer = () => {
-		if (!gameStarted) {
+		if (!gameStarted || gameOver) {
 			return;
 		}
 		if (!validate()) {
@@ -115,6 +116,7 @@
 		clearTimeout(runningTimer);
 		alertModalControl("Correct!", 1500);
 		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 4000));
+		gameOver = true;
 	};
 
 	const validate = () => {
