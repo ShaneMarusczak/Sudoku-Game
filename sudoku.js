@@ -17,7 +17,6 @@
 	var board = [];
 	const copiedBoard = [];
 	const answerBoard = [];
-	const hintBoard = [];
 	let difficulty;
 	let solved = false;
 	let gameStarted = false;
@@ -280,13 +279,11 @@
 		board.push([]);
 		copiedBoard.push([]);
 		answerBoard.push([]);
-		hintBoard.push([]);
 		const entryRow = document.createElement("div");
 		boardUI.appendChild(entryRow);
 		for (let j = 0; j < cols; j++) {
 			answerBoard[i][j] = "";
 			board[i][j] = "";
-			hintBoard[i][j] = "";
 			copiedBoard[i][j] = "";
 			const entryDiv = document.createElement("div");
 			const entry = document.createElement("input");
