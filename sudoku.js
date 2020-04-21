@@ -271,7 +271,6 @@
 
 	};
 
-
 	const numsUsed = () => {
 		const numsDict = {
 			"1": 0,
@@ -286,17 +285,14 @@
 		};
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
-				const val = document.getElementById("s" + y + x).value;
-				if (val !== "") {
-					numsDict[val]++;
-				}
+				numsDict[document.getElementById("s" + y + x).value]++;
 			}
 		}
 		for (let i = 1; i < 10; i++) {
-			if (numsDict[i.toString()] === 9) {
-				document.getElementById("used" + i).innerHTML = i;
+			if (numsDict[i.toString()] >= 9) {
+				document.getElementById("used" + i).classList.remove("hide");
 			} else {
-				document.getElementById("used" + i).innerHTML = "";
+				document.getElementById("used" + i).classList.add("hide");
 			}
 		}
 	};
