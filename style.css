@@ -168,3 +168,12 @@ input[type="radio"]:hover+label:not(.noHover) {
 .link {
 	display: table;
 }
+
+#usedNums {
+	margin-left: 30px;
+}
+
+#boards {
+	display: flex;
+	flex-direction: row;
+}

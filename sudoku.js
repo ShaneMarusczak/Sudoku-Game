@@ -261,7 +261,7 @@
 	};
 
 	const noteOpenButtonShow = (e) => {
-		if (gameStarted && e.target.tagName !== "SPAN" && document.getElementById("s" + e.target.id.substring(1)).readOnly !== true) {
+		if (gameStarted && e.target.tagName !== "SPAN" && e.target.tagName !== "DIV" && document.getElementById("s" + e.target.id.substring(1)).readOnly !== true) {
 			document.getElementById("no" + e.target.id.substring(1)).classList.add("opaque");
 		}
 	};
@@ -269,6 +269,36 @@
 	const noteOpenButtonHide = (e) => {
 		document.getElementById("no" + e.target.id.substring(2)).classList.remove("opaque");
 
+	};
+
+
+	const numsUsed = () => {
+		const numsDict = {
+			"1": 0,
+			"2": 0,
+			"3": 0,
+			"4": 0,
+			"5": 0,
+			"6": 0,
+			"7": 0,
+			"8": 0,
+			"9": 0
+		};
+		for (let y = 0; y < rows; y++) {
+			for (let x = 0; x < cols; x++) {
+				const val = document.getElementById("s" + y + x).value;
+				if (val !== "") {
+					numsDict[val]++;
+				}
+			}
+		}
+		for (let i = 1; i < 10; i++) {
+			if (numsDict[i.toString()] === 9) {
+				document.getElementById("used" + i).innerHTML = i;
+			} else {
+				document.getElementById("used" + i).innerHTML = "";
+			}
+		}
 	};
 	//#endregion
 
@@ -308,6 +338,7 @@
 			noteOpen.id = "no" + i + j;
 			entry.readOnly = true;
 			entry.type = "text";
+			entry.addEventListener("focusout", numsUsed);
 			entryDiv.classList.add("entryDiv");
 			noteOpenDiv.classList.add("noteOpenDiv");
 			entryDiv.addEventListener("mouseover", noteOpenButtonShow);
