@@ -298,60 +298,62 @@
 	};
 	//#endregion
 
-	//#region event listeners
-	startBtn.addEventListener("click", start);
+	(() => {
+		//#region event listeners
+		startBtn.addEventListener("click", start);
 
-	checkAnswerButton.addEventListener("click", checkAnswer);
+		checkAnswerButton.addEventListener("click", checkAnswer);
 
-	startOverBtn.addEventListener("click", () => location.reload());
+		startOverBtn.addEventListener("click", () => location.reload());
 
-	document.addEventListener("click", hideNotes);
-	//#endregion
+		document.addEventListener("click", hideNotes);
+		//#endregion
 
-	//#region page setup
-	for (let i = 0; i < rows; i++) {
-		board.push([]);
-		copiedBoard.push([]);
-		answerBoard.push([]);
-		const entryRow = document.createElement("div");
-		entryRow.classList.add("entryRow");
-		boardUI.appendChild(entryRow);
-		for (let j = 0; j < cols; j++) {
-			answerBoard[i][j] = "";
-			board[i][j] = "";
-			copiedBoard[i][j] = "";
-			const entryDiv = document.createElement("div");
-			const entry = document.createElement("input");
-			const note = document.createElement("textarea");
-			const noteOpen = document.createElement("span");
-			const noteOpenDiv = document.createElement("div");
-			noteOpen.innerHTML = "»";
-			noteOpen.classList.add("hide");
-			note.classList.add("hide");
-			entryDiv.id = "ed" + i + j;
-			note.id = "n" + i + j;
-			entry.id = "s" + i + j;
-			noteOpen.id = "no" + i + j;
-			entry.readOnly = true;
-			entry.type = "text";
-			entry.addEventListener("focusout", numsUsed);
-			entryDiv.classList.add("entryDiv");
-			noteOpenDiv.classList.add("noteOpenDiv");
-			entryDiv.addEventListener("mouseover", noteOpenButtonShow);
-			entryDiv.addEventListener("mouseleave", noteOpenButtonHide);
-			entryDiv.appendChild(entry);
-			entryDiv.appendChild(note);
-			noteOpenDiv.appendChild(noteOpen);
-			entryDiv.appendChild(noteOpenDiv);
-			noteOpen.addEventListener("click", noteDisplayHandler);
-			entryRow.appendChild(entryDiv);
-			if (j === 2 || j === 5) {
-				entry.classList.add("rightBorder");
-			}
-			if (i === 2 || i === 5) {
-				entry.classList.add("bottomBorder");
+		//#region page setup
+		for (let i = 0; i < rows; i++) {
+			board.push([]);
+			copiedBoard.push([]);
+			answerBoard.push([]);
+			const entryRow = document.createElement("div");
+			entryRow.classList.add("entryRow");
+			boardUI.appendChild(entryRow);
+			for (let j = 0; j < cols; j++) {
+				answerBoard[i][j] = "";
+				board[i][j] = "";
+				copiedBoard[i][j] = "";
+				const entryDiv = document.createElement("div");
+				const entry = document.createElement("input");
+				const note = document.createElement("textarea");
+				const noteOpen = document.createElement("span");
+				const noteOpenDiv = document.createElement("div");
+				noteOpen.innerHTML = "»";
+				noteOpen.classList.add("hide");
+				note.classList.add("hide");
+				entryDiv.id = "ed" + i + j;
+				note.id = "n" + i + j;
+				entry.id = "s" + i + j;
+				noteOpen.id = "no" + i + j;
+				entry.readOnly = true;
+				entry.type = "text";
+				entry.addEventListener("focusout", numsUsed);
+				entryDiv.classList.add("entryDiv");
+				noteOpenDiv.classList.add("noteOpenDiv");
+				entryDiv.addEventListener("mouseover", noteOpenButtonShow);
+				entryDiv.addEventListener("mouseleave", noteOpenButtonHide);
+				entryDiv.appendChild(entry);
+				entryDiv.appendChild(note);
+				noteOpenDiv.appendChild(noteOpen);
+				entryDiv.appendChild(noteOpenDiv);
+				noteOpen.addEventListener("click", noteDisplayHandler);
+				entryRow.appendChild(entryDiv);
+				if (j === 2 || j === 5) {
+					entry.classList.add("rightBorder");
+				}
+				if (i === 2 || i === 5) {
+					entry.classList.add("bottomBorder");
+				}
 			}
 		}
-	}
-	//#endregion
+		//#endregion
+	})();
 })();
