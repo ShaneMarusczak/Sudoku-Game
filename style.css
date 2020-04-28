@@ -6,6 +6,38 @@ html {
 	font-family: "Orbitron", sans-serif;
 }
 
+#githubicon {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	left: 650px;
+	top: 40px;
+	transition: 1.5s;
+	z-index: 0;
+	background-color: transparent;
+	border-radius: 30px;
+}
+
+#githubicon:hover {
+	transform: translateY(-5px);
+	background-color: azure;
+}
+
+button {
+	margin-top: 25px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	font-family: "Orbitron", sans-serif;
+	font-size: x-large;
+	width: 150px;
+	height: 75px;
+}
+
+button:hover {
+	cursor: pointer;
+	background-color: #ddd;
+}
+
 h1 {
 	font-size: 4vh;
 	margin-left: 10px;
@@ -47,16 +79,6 @@ input[type="text"]:hover {
 	background-color: rgb(159, 205, 243) !important;
 }
 
-button {
-	margin-top: 25px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	font-family: "Orbitron", sans-serif;
-	font-size: x-large;
-	width: 150px;
-	height: 75px;
-}
-
 .entryRow {
 	display: flex;
 }
@@ -74,6 +96,12 @@ input[type="text"] {
 	display: none;
 }
 
+a {
+	text-decoration: none;
+	margin-bottom: 10px;
+	font-size: 1.1rem;
+}
+
 a:hover {
 	color: cadetblue;
 }
@@ -81,11 +109,6 @@ a:hover {
 #updateText {
 	font-size: small;
 	margin-top: 10px;
-}
-
-button:hover {
-	cursor: pointer;
-	background-color: #ddd;
 }
 
 #alertshader {
@@ -170,7 +193,7 @@ input[type="radio"]:hover+label:not(.noHover) {
 }
 
 #usedNums {
-	margin-left: 30px;
+	margin-left: 40px;
 }
 
 #boards {
