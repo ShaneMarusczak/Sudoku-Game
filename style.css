@@ -66,6 +66,13 @@ input[type="radio"] {
 	height: 25px;
 }
 
+@media screen and (max-width: 1000px) {
+	input[type="text"] {
+		width: 55px !important;
+		height: 55px !important;
+	}
+}
+
 .rightBorder {
 	border-right: 4px solid black !important;
 }
