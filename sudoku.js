@@ -61,12 +61,14 @@
 	//inclusive
 	const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
+	const selectedRadioBtnForForm = (formName) => Array.from(document.getElementsByName(formName)).find(input => input.checked);
+
 	const start = () => {
 		if (gameStarted) {
 			return;
 		}
 
-		difficulty = Array.from(document.getElementsByName("difficulty")).find(input => input.checked);
+		difficulty = selectedRadioBtnForForm("difficulty");
 
 		if (typeof difficulty === "undefined") {
 			alertModalControl("Please select a difficulty.", 1500);
