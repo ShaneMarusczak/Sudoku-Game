@@ -61,7 +61,7 @@
 	//inclusive
 	const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-	const selectedRadioBtnForForm = (formName) => Array.from(document.getElementsByName(formName)).find(input => input.checked);
+	const selectedRadioBtnForForm = (formName) => Array.from(document.getElementsByName(formName)).find(input => input.type === "radio" && input.checked);
 
 	const start = () => {
 		if (gameStarted) {
