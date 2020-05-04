@@ -10,7 +10,7 @@ html {
 	width: 60px;
 	height: 60px;
 	position: absolute;
-	left: 650px;
+	right: 10vw;
 	top: 40px;
 	transition: 1.5s;
 	z-index: 0;
@@ -66,10 +66,18 @@ input[type="radio"] {
 	height: 25px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 860px) {
 	input[type="text"] {
-		width: 50px !important;
-		height: 50px !important;
+		width: 45px !important;
+		height: 45px !important;
+	}
+
+	.oddRight {
+		width: 51px;
+	}
+
+	.strangeRight {
+		width: 53px;
 	}
 }
 

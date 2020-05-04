@@ -350,6 +350,9 @@
 				entryRow.appendChild(entryDiv);
 				if (j === 2 || j === 5) {
 					entry.classList.add("rightBorder");
+					entryDiv.classList.add("strangeRight");
+				} else {
+					entryDiv.classList.add("oddRight");
 				}
 				if (i === 2 || i === 5) {
 					entry.classList.add("bottomBorder");
