@@ -68,12 +68,14 @@
 			return;
 		}
 
-		difficulty = selectedRadioBtnForForm("difficulty");
-
-		if (typeof difficulty === "undefined") {
+		if (!Array.from(document.getElementsByName("difficulty")).some(elem => elem.checked)) {
 			alertModalControl("Please select a difficulty.", 1500);
 			return;
 		}
+
+		difficulty = selectedRadioBtnForForm("difficulty");
+
+
 		generateRandomBoard();
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
@@ -92,10 +94,11 @@
 	};
 
 	const displayControl = () => {
+		document.getElementById("usedNums").classList.remove("hide");
+		document.getElementById("difficultySelect").classList.add("hide");
 		document.getElementById("introText").classList.add("hide");
 		timer.classList.remove("hide");
 		timerStart();
-		disableDifficultyRadios();
 	};
 
 	const checkAnswer = () => {
@@ -116,8 +119,8 @@
 			return;
 		}
 		clearTimeout(runningTimer);
-		alertModalControl("Correct!", 1500);
-		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 4000));
+		alertModalControl("Correct!", 2500);
+		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 3000));
 		boardtoGreen();
 		gameOver = true;
 	};
@@ -229,13 +232,6 @@
 		board[7][2] = randomIntFromInterval(1, 9);
 		board[8][5] = randomIntFromInterval(1, 9);
 		solve(copiedBoard);
-	};
-
-	const disableDifficultyRadios = () => {
-		Array.from(document.getElementsByName("difficulty")).forEach(r => {
-			r.disabled = true;
-		});
-		Array.from(document.getElementsByTagName("label")).forEach(r => r.classList.add("noHover"));
 	};
 
 	const noteDisplayHandler = (e) => {
