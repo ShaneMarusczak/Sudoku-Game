@@ -9,6 +9,7 @@
 	const startOverBtn = document.getElementById("startover");
 	const checkAnswerButton = document.getElementById("checkAnswer");
 	const timer = document.getElementById("timer");
+	const completedPuzzlesOnLoad = Number(getCookie("completedSudokuPuzzles"));
 	let seconds = 0;
 	let minutes = 0;
 	let hours = 0;
@@ -28,6 +29,29 @@
 	//#endregion
 
 	//#region functions
+	function setCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+		var expires = "expires=" + d.toUTCString();
+		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	}
+
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(";");
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == " ") {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return "";
+	}
+
 	const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 	const alertModalControl = (message, duration) => {
@@ -118,6 +142,8 @@
 			alertModalControl("Sorry, incorrect!", 1500);
 			return;
 		}
+		document.getElementById("completedPuzzles").innerText = "Completed Puzzles: " + (completedPuzzlesOnLoad + 1);
+		setCookie("completedSudokuPuzzles", completedPuzzlesOnLoad + 1, 10);
 		clearTimeout(runningTimer);
 		alertModalControl("Correct!", 2500);
 		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 3000));
@@ -355,6 +381,8 @@
 				}
 			}
 		}
+
+		document.getElementById("completedPuzzles").innerText = "Completed Puzzles: " + completedPuzzlesOnLoad;
 		//#endregion
 	})();
 })();
