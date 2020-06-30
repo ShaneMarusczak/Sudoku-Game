@@ -53,20 +53,7 @@ html {
 	transform: translateY(-5px);
 }
 
-button {
-	margin-top: 25px;
-	margin-right: 20px;
-	margin-bottom: 20px;
-	font-family: "Orbitron", sans-serif;
-	font-size: x-large;
-	width: 150px;
-	height: 75px;
-}
 
-button:hover {
-	cursor: pointer;
-	background-color: #ddd;
-}
 
 h1 {
 	font-size: 4vh;
@@ -245,4 +232,28 @@ input[type="radio"]:hover+label:not(.noHover) {
 #boards {
 	display: flex;
 	flex-direction: row;
+}
+
+#btns {
+	width: fit-content;
+	justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+}
+
+.btn {
+	border: 1px solid black;
+	text-align: center;
+	margin-top: 25px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	font-family: "Orbitron", sans-serif;
+	font-size: 2rem;
+	width: 160px;
+	height: 85px;
+}
+
+.btn:hover {
+	cursor: pointer;
+	background-color: #ddd;
 }
