@@ -9,7 +9,7 @@
 	const startOverBtn = document.getElementById("startover");
 	const checkAnswerButton = document.getElementById("checkAnswer");
 	const timer = document.getElementById("timer");
-	const completedPuzzlesOnLoad = Number(getCookie("completedSudokuPuzzles"));
+	const completedPuzzlesOnLoad = Number(window.getCookie("completedSudokuPuzzles"));
 	let seconds = 0;
 	let minutes = 0;
 	let hours = 0;
@@ -29,35 +29,10 @@
 	//#endregion
 
 	//#region functions
-	function setCookie(cname, cvalue, exdays) {
-		var d = new Date();
-		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-		var expires = "expires=" + d.toUTCString();
-		document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-	}
-
-	function getCookie(cname) {
-		var name = cname + "=";
-		var decodedCookie = decodeURIComponent(document.cookie);
-		var ca = decodedCookie.split(";");
-		for (var i = 0; i < ca.length; i++) {
-			var c = ca[i];
-			while (c.charAt(0) == " ") {
-				c = c.substring(1);
-			}
-			if (c.indexOf(name) == 0) {
-				return c.substring(name.length, c.length);
-			}
-		}
-		return "";
-	}
-
-	const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 	const alertModalControl = (message, duration) => {
 		document.getElementById("alertshader").classList.remove("hide");
 		document.getElementById("alertmessage").innerText = message;
-		sleep(duration).then(() => {
+		window.sleep(duration).then(() => {
 			document.getElementById("alertshader").classList.add("hide");
 		});
 	};
@@ -82,9 +57,6 @@
 		runningTimer = setTimeout(timerTick, 1000);
 	};
 
-	//inclusive
-	const randomIntFromInterval = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-
 	const selectedRadioBtnForForm = (formName) => Array.from(document.getElementsByName(formName)).find(input => input.type === "radio" && input.checked);
 
 	const start = () => {
@@ -104,7 +76,7 @@
 		for (let y = 0; y < rows; y++) {
 			for (let x = 0; x < cols; x++) {
 				document.getElementById("s" + y + x).readOnly = false;
-				if (randomIntFromInterval(0, difficultySettings[difficulty.value]) === 0) {
+				if (window.randomIntFromInterval(0, difficultySettings[difficulty.value]) === 0) {
 					document.getElementById("s" + y + x).value = copiedBoard[y][x];
 					document.getElementById("s" + y + x).readOnly = true;
 				} else {
@@ -143,10 +115,10 @@
 			return;
 		}
 		document.getElementById("completedPuzzles").innerText = "Completed Puzzles: " + (completedPuzzlesOnLoad + 1);
-		setCookie("completedSudokuPuzzles", completedPuzzlesOnLoad + 1, 10);
+		window.setCookie("completedSudokuPuzzles", completedPuzzlesOnLoad + 1, 10);
 		clearTimeout(runningTimer);
 		alertModalControl("Correct!", 2500);
-		sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 3000));
+		window.sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 3000));
 		boardtoGreen();
 		gameOver = true;
 	};
@@ -248,15 +220,15 @@
 	};
 
 	const generateRandomBoard = () => {
-		board[0][0] = randomIntFromInterval(1, 9);
-		board[1][7] = randomIntFromInterval(1, 9);
-		board[2][4] = randomIntFromInterval(1, 9);
-		board[3][3] = randomIntFromInterval(1, 9);
-		board[4][1] = randomIntFromInterval(1, 9);
-		board[5][8] = randomIntFromInterval(1, 9);
-		board[6][6] = randomIntFromInterval(1, 9);
-		board[7][2] = randomIntFromInterval(1, 9);
-		board[8][5] = randomIntFromInterval(1, 9);
+		board[0][0] = window.randomIntFromInterval(1, 9);
+		board[1][7] = window.randomIntFromInterval(1, 9);
+		board[2][4] = window.randomIntFromInterval(1, 9);
+		board[3][3] = window.randomIntFromInterval(1, 9);
+		board[4][1] = window.randomIntFromInterval(1, 9);
+		board[5][8] = window.randomIntFromInterval(1, 9);
+		board[6][6] = window.randomIntFromInterval(1, 9);
+		board[7][2] = window.randomIntFromInterval(1, 9);
+		board[8][5] = window.randomIntFromInterval(1, 9);
 		solve(copiedBoard);
 	};
 
