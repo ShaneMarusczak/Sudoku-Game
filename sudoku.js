@@ -302,7 +302,6 @@
 
 		startOverBtn.addEventListener("click", () => location.reload());
 
-		document.addEventListener("click", hideNotes);
 		//#endregion
 
 		//#region page setup

@@ -13,7 +13,7 @@ html {
 #completedPuzzles {
 	position: absolute;
 	top: 200px;
-	left: 5vw;
+	left: 2vw;
 }
 
 #githubicon {
@@ -41,7 +41,7 @@ html {
 #homeIcon {
 	position: absolute;
 	top: 40px;
-	right: 20vw;
+	left: 10vw;
 	width: 60px;
 	height: 60px;
 	transition: 1.5s;
@@ -88,6 +88,12 @@ input[type="radio"] {
 	height: 25px;
 }
 
+@media screen and (max-width: 1280px) {
+	#completedPuzzles {
+		display: none;
+	}
+}
+
 @media screen and (max-width: 860px) {
 	input[type="text"] {
 		width: 49px !important;
@@ -105,7 +111,7 @@ input[type="radio"] {
 
 	textarea {
 		width: 33px !important;
-		height: 33px !important;
+		height: 12px !important;
 	}
 
 	.noteOpenDiv {
@@ -182,8 +188,9 @@ input[type="text"] {
 
 textarea {
 	width: 50px;
-	height: 50px;
+	height: 15px;
 	resize: none;
+	overflow: hidden;
 	z-index: 3;
 }
 
