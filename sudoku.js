@@ -236,6 +236,7 @@
 		const noteElem = document.getElementById("n" + e.target.id.substring(2));
 		if (noteElem.classList.contains("hide") && gameStarted && document.getElementById("s" + e.target.id.substring(2)).readOnly !== true) {
 			noteElem.classList.remove("hide");
+			noteElem.focus();
 			document.getElementById("no" + e.target.id.substring(2)).innerHTML = "«";
 
 		} else {
@@ -330,6 +331,7 @@
 				noteOpen.id = "no" + i + j;
 				entry.readOnly = true;
 				entry.type = "text";
+				entry.maxLength = 1;
 				entry.addEventListener("focusout", numsUsed);
 				entryDiv.classList.add("entryDiv");
 				noteOpenDiv.classList.add("noteOpenDiv");
