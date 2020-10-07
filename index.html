@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=800" />
 	<title>Sudoku</title>
-	<link rel="stylesheet" type="text/css" href="style.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://marusczak.com/BuildingBlocks/css/modal.min.css" />
 	<meta name="Description" content="Play Sudoku">
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -22,9 +22,9 @@
 <body>
 	<h1>Sudoku</h1>
 	<a id="homeLink" href="https://marusczak.com/Games-Home-Page" rel="noreferrer"><img id="homeIcon"
-			src="house-icon.png"></a>
+			src="images/house-icon.png"></a>
 	<a id="gitHubLink" href="https://github.com/ShaneMarusczak/Sudoku-Game" target="_blank" rel="noreferrer"><img
-			id="githubicon" src="github-icon.jpg"></a>
+			id="githubicon" src="images/github-icon.jpg"></a>
 	<h3 id="introText">Select a difficulty then click Start Game to Begin!</h3>
 	<div id="difficultySelect">
 		<input type="radio" name="difficulty" value="easy" id="Easy">
@@ -49,20 +49,16 @@
 		<h2 id="used8" class="hide used">8</h2>
 		<h2 id="used9" class="hide used">9</h2>
 	</div>
-	<div id="boards">
-		<div id="sudoku" class="shadowBox"></div>
-	</div>
-	<div id="menu">
-		<div id="btns">
-			<div id="start" class="shadowBox btn">Start Game</div>
-			<div id="checkAnswer" class="shadowBox btn">Check Answer</div>
-			<div id="startover" class="shadowBox btn">Start Over</div>
-		</div>
+	<div id="sudoku" class="shadowBox"></div>
+	<div id="btns">
+		<div id="start" class="shadowBox btn">Start Game</div>
+		<div id="checkAnswer" class="shadowBox btn">Check Answer</div>
+		<div id="startover" class="shadowBox btn">Start Over</div>
 	</div>
 	<p id="updateText">Last Updated: October 7, 2020</p>
 </body>
 <script type="text/javascript" src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"></script>
 <script type="text/javascript" src="https://marusczak.com/BuildingBlocks/js/modal.min.js"></script>
-<script type="text/javascript" src="sudoku.min.js"></script>
+<script type="text/javascript" src="js/sudoku.min.js"></script>
 
 </html>
