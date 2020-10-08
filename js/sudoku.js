@@ -1,40 +1,26 @@
 "use strict";
 (() => {
-	//#region variables
 	var runningTimer;
-	const rows = 9;
-	const cols = 9;
-	const boardUI = document.getElementById("sudoku");
-	const startBtn = document.getElementById("start");
-	const startOverBtn = document.getElementById("startover");
-	const checkAnswerButton = document.getElementById("checkAnswer");
-	const timer = document.getElementById("timer");
-	const completedPuzzlesOnLoad = Number(window.getCookie("completedSudokuPuzzles"));
+	var board = [];
 	let seconds = 0;
 	let minutes = 0;
 	let hours = 0;
-	var board = [];
-	const copiedBoard = [];
-	const answerBoard = [];
 	let difficulty;
 	let solved = false;
 	let gameStarted = false;
 	let gameOver = false;
+	const rows = 9;
+	const cols = 9;
+	const boardUI = document.getElementById("sudoku");
+	const timer = document.getElementById("timer");
+	const completedPuzzlesOnLoad = Number(window.getCookie("completedSudokuPuzzles"));
+	const copiedBoard = [];
+	const answerBoard = [];
 	const difficultySettings = {
 		"easy": 1,
 		"hard": 3,
 		"insane": 5,
 		"medium": 2
-	};
-	//#endregion
-
-	//#region functions
-	const alertModalControl = (message, duration) => {
-		document.getElementById("alertshader").classList.remove("hide");
-		document.getElementById("alertmessage").innerText = message;
-		window.sleep(duration).then(() => {
-			document.getElementById("alertshader").classList.add("hide");
-		});
 	};
 
 	const timerTick = () => {
@@ -65,7 +51,7 @@
 		}
 
 		if (!Array.from(document.getElementsByName("difficulty")).some(elem => elem.checked)) {
-			alertModalControl("Please select a difficulty.", 1500);
+			window.modal("Please select a difficulty.", 1600);
 			return;
 		}
 
@@ -102,7 +88,7 @@
 			return;
 		}
 		if (!validate()) {
-			alertModalControl("Not all entries are valid!", 1500);
+			window.modal("Not all entries are valid!", 1500);
 			return;
 		}
 		for (let y = 0; y < rows; y++) {
@@ -111,14 +97,14 @@
 			}
 		}
 		if (!validBoard(answerBoard)) {
-			alertModalControl("Sorry, incorrect!", 1500);
+			window.modal("Sorry, incorrect!", 1500);
 			return;
 		}
 		document.getElementById("completedPuzzles").innerText = "Completed Puzzles: " + (completedPuzzlesOnLoad + 1);
 		window.setCookie("completedSudokuPuzzles", completedPuzzlesOnLoad + 1, 10);
 		clearTimeout(runningTimer);
-		alertModalControl("Correct!", 2500);
-		window.sleep(1500).then(() => alertModalControl("You finished in " + timer.textContent, 3000));
+		window.modal("Correct!", 2500);
+		window.sleep(1500).then(() => window.modal("You finished in " + timer.textContent, 3000));
 		boardtoGreen();
 		gameOver = true;
 	};
@@ -309,21 +295,12 @@
 		document.querySelectorAll("textarea").forEach(elem => elem.classList.remove("textareaToggle"));
 		document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.remove("noteOpenDivToggle"));
 	};
-	//#endregion
 
 	(() => {
-		//#region event listeners
-		startBtn.addEventListener("click", start);
-
-		checkAnswerButton.addEventListener("click", checkAnswer);
-
-		startOverBtn.addEventListener("click", () => location.reload());
-
+		document.getElementById("start").addEventListener("click", start);
+		document.getElementById("checkAnswer").addEventListener("click", checkAnswer);
 		document.getElementById("toggleSize").addEventListener("click", toggleSize);
 
-		//#endregion
-
-		//#region page setup
 		for (let i = 0; i < rows; i++) {
 			board.push([]);
 			copiedBoard.push([]);
@@ -376,6 +353,5 @@
 			makeBoardSmall();
 		}
 		document.getElementById("completedPuzzles").innerText = "Completed Puzzles: " + completedPuzzlesOnLoad;
-		//#endregion
 	})();
 })();

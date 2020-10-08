@@ -11,13 +11,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 </head>
 
-<div id="alertshader" class="hide">
-	<div id="alert">
-		<span id="alertmessage"></span>
-	</div>
-</div>
 <h2 id="completedPuzzles"></h2>
-
 
 <body>
 	<h1>Sudoku</h1>
@@ -53,7 +47,7 @@
 	<div id="btns">
 		<div id="start" class="shadowBox btn">Start Game</div>
 		<div id="checkAnswer" class="shadowBox btn">Check Answer</div>
-		<div id="startover" class="shadowBox btn">Start Over</div>
+		<div id="startover" class="shadowBox btn" onclick="location.reload()">Start Over</div>
 		<div id="toggleSize" class="shadowBox btn">Toggle Size</div>
 	</div>
 	<p id="updateText">Last Updated: October 8, 2020</p>

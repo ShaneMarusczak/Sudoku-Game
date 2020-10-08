@@ -53,8 +53,6 @@ html {
 	transform: translateY(-5px);
 }
 
-
-
 h1 {
 	font-size: 4vh;
 	margin-left: 10px;
@@ -123,8 +121,6 @@ input[type="radio"] {
 	}
 }
 
-
-
 .textInputToggle {
 	width: 49px !important;
 	height: 49px !important;
@@ -147,8 +143,6 @@ input[type="radio"] {
 .noteOpenDivToggle {
 	margin-left: 40px !important;
 }
-
-
 
 .rightBorder {
 	border-right: 4px solid black !important;
@@ -185,38 +179,6 @@ input[type="text"] {
 	margin-top: 10px;
 }
 
-#alertshader {
-	z-index: 98;
-	position: fixed;
-	padding: 0;
-	margin: 0;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
-}
-
-#alert {
-	z-index: 99;
-	text-align: center;
-	border-radius: 5px;
-	box-shadow: inset 0px 0px 0px 4px black;
-	margin-left: 40vw;
-	margin-top: 15vh;
-	background-color: azure;
-	width: 350px;
-	height: 15vh;
-}
-
-#alertmessage {
-	z-index: 99;
-	vertical-align: middle;
-	font-family: "Orbitron", sans-serif;
-	font-size: x-large;
-	line-height: 15vh;
-}
-
 textarea {
 	width: 50px;
 	height: 15px;
@@ -244,15 +206,19 @@ textarea,
 	grid-row: 1;
 }
 
-span:not(#alertmessage) {
+span:not(#modal-message) {
 	z-index: 2;
 	opacity: 0;
 	position: absolute;
 	transition: opacity 150ms;
 }
 
-span:not(#alertmessage):hover {
+span:not(#modal-message):hover {
 	cursor: pointer;
+}
+
+#modal-message {
+	font-size: x-large !important;
 }
 
 input[type="radio"]:hover+label:not(.noHover) {
