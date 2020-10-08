@@ -285,12 +285,12 @@
 
 
 	const toggleSize = () => {
-		if (window.getCookie("largeBoard") === "true") {
-			makeBoardSmall();
-			window.setCookie("largeBoard", "false", 10);
-		} else {
+		if (window.getCookie("largeBoard") === "false") {
 			makeBoardBig();
 			window.setCookie("largeBoard", "true", 10);
+		} else {
+			makeBoardSmall();
+			window.setCookie("largeBoard", "false", 10);
 		}
 	};
 
