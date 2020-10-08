@@ -283,23 +283,31 @@
 		}
 	};
 
-	let largeBoard = true;
 
 	const toggleSize = () => {
-		if (largeBoard) {
-			document.querySelectorAll("input[type=text]").forEach(elem => elem.classList.add("textInputToggle"));
-			document.querySelectorAll(".oddRight").forEach(elem => elem.classList.add("oddRightToggle"));
-			document.querySelectorAll(".strangeRight").forEach(elem => elem.classList.add("strangeRightToggle"));
-			document.querySelectorAll("textarea").forEach(elem => elem.classList.add("textareaToggle"));
-			document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.add("noteOpenDivToggle"));
+		if (window.getCookie("largeBoard") === "true") {
+			makeBoardSmall();
+			window.setCookie("largeBoard", "false", 10);
 		} else {
-			document.querySelectorAll("input[type=text]").forEach(elem => elem.classList.remove("textInputToggle"));
-			document.querySelectorAll(".oddRight").forEach(elem => elem.classList.remove("oddRightToggle"));
-			document.querySelectorAll(".strangeRight").forEach(elem => elem.classList.remove("strangeRightToggle"));
-			document.querySelectorAll("textarea").forEach(elem => elem.classList.remove("textareaToggle"));
-			document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.remove("noteOpenDivToggle"));
+			makeBoardBig();
+			window.setCookie("largeBoard", "true", 10);
 		}
-		largeBoard = !largeBoard;
+	};
+
+	const makeBoardSmall = () => {
+		document.querySelectorAll("input[type=text]").forEach(elem => elem.classList.add("textInputToggle"));
+		document.querySelectorAll(".oddRight").forEach(elem => elem.classList.add("oddRightToggle"));
+		document.querySelectorAll(".strangeRight").forEach(elem => elem.classList.add("strangeRightToggle"));
+		document.querySelectorAll("textarea").forEach(elem => elem.classList.add("textareaToggle"));
+		document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.add("noteOpenDivToggle"));
+	};
+
+	const makeBoardBig = () => {
+		document.querySelectorAll("input[type=text]").forEach(elem => elem.classList.remove("textInputToggle"));
+		document.querySelectorAll(".oddRight").forEach(elem => elem.classList.remove("oddRightToggle"));
+		document.querySelectorAll(".strangeRight").forEach(elem => elem.classList.remove("strangeRightToggle"));
+		document.querySelectorAll("textarea").forEach(elem => elem.classList.remove("textareaToggle"));
+		document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.remove("noteOpenDivToggle"));
 	};
 	//#endregion
 
@@ -364,7 +372,9 @@
 				}
 			}
 		}
-
+		if (window.getCookie("largeBoard") === "false") {
+			makeBoardSmall();
+		}
 		document.getElementById("completedPuzzles").innerText = "Completed Puzzles: " + completedPuzzlesOnLoad;
 		//#endregion
 	})();
