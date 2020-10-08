@@ -117,7 +117,38 @@ input[type="radio"] {
 	.noteOpenDiv {
 		margin-left: 40px !important;
 	}
+
+	#toggleSize {
+		display: none;
+	}
 }
+
+
+
+.textInputToggle {
+	width: 49px !important;
+	height: 49px !important;
+	padding: 0;
+}
+
+.oddRightToggle {
+	width: 51px;
+}
+
+.strangeRightToggle {
+	width: 53px;
+}
+
+.textareaToggle {
+	width: 33px !important;
+	height: 12px !important;
+}
+
+.noteOpenDivToggle {
+	margin-left: 40px !important;
+}
+
+
 
 .rightBorder {
 	border-right: 4px solid black !important;
@@ -250,9 +281,9 @@ input[type="radio"]:hover+label:not(.noHover) {
 	margin-right: 20px;
 	margin-bottom: 20px;
 	font-family: "Orbitron", sans-serif;
-	font-size: 2rem;
-	width: 160px;
-	height: 85px;
+	font-size: 1.5rem;
+	width: 140px;
+	height: 65px;
 }
 
 .btn:hover {

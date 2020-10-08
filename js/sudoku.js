@@ -246,17 +246,6 @@
 		}
 	};
 
-	const hideNotes = (e) => {
-		if (e.target.tagName !== "TEXTAREA" && e.target.tagName !== "INPUT" && e.target.tagName !== "SPAN") {
-			Array.from(document.getElementsByTagName("textarea")).forEach(elem => elem.classList.add("hide"));
-			Array.from(document.getElementsByTagName("span")).forEach(elem => {
-				if (elem.id !== "alertmessage") {
-					elem.innerHTML = "»";
-				}
-			});
-		}
-	};
-
 	const noteOpenButtonShow = (e) => {
 		if (gameStarted && e.target.tagName !== "SPAN" && e.target.tagName !== "DIV" && document.getElementById("s" + e.target.id.substring(1)).readOnly !== true) {
 			document.getElementById("no" + e.target.id.substring(1)).classList.add("opaque");
@@ -293,6 +282,25 @@
 			}
 		}
 	};
+
+	let largeBoard = true;
+
+	const toggleSize = () => {
+		if (largeBoard) {
+			document.querySelectorAll("input[type=text]").forEach(elem => elem.classList.add("textInputToggle"));
+			document.querySelectorAll(".oddRight").forEach(elem => elem.classList.add("oddRightToggle"));
+			document.querySelectorAll(".strangeRight").forEach(elem => elem.classList.add("strangeRightToggle"));
+			document.querySelectorAll("textarea").forEach(elem => elem.classList.add("textareaToggle"));
+			document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.add("noteOpenDivToggle"));
+		} else {
+			document.querySelectorAll("input[type=text]").forEach(elem => elem.classList.remove("textInputToggle"));
+			document.querySelectorAll(".oddRight").forEach(elem => elem.classList.remove("oddRightToggle"));
+			document.querySelectorAll(".strangeRight").forEach(elem => elem.classList.remove("strangeRightToggle"));
+			document.querySelectorAll("textarea").forEach(elem => elem.classList.remove("textareaToggle"));
+			document.querySelectorAll(".noteOpenDiv").forEach(elem => elem.classList.remove("noteOpenDivToggle"));
+		}
+		largeBoard = !largeBoard;
+	};
 	//#endregion
 
 	(() => {
@@ -302,6 +310,8 @@
 		checkAnswerButton.addEventListener("click", checkAnswer);
 
 		startOverBtn.addEventListener("click", () => location.reload());
+
+		document.getElementById("toggleSize").addEventListener("click", toggleSize);
 
 		//#endregion
 
