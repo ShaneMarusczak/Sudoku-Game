@@ -1,59 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=800" />
+    <title>Sudoku</title>
+    <link rel="stylesheet" type="text/css" href="css/style.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://marusczak.com/BuildingBlocks/css/modal.min.css"
+    />
+    <meta name="Description" content="Play Sudoku" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=800" />
-	<title>Sudoku</title>
-	<link rel="stylesheet" type="text/css" href="css/style.min.css" />
-	<link rel="stylesheet" type="text/css" href="https://marusczak.com/BuildingBlocks/css/modal.min.css" />
-	<meta name="Description" content="Play Sudoku">
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-</head>
+  <h2 id="completedPuzzles"></h2>
 
-<h2 id="completedPuzzles"></h2>
+  <body>
+    <h1>Sudoku</h1>
+    <a
+      id="homeLink"
+      href="https://marusczak.com/Games-Home-Page"
+      rel="noreferrer"
+      ><img id="homeIcon" src="images/house-icon.png"
+    /></a>
 
-<body>
-	<h1>Sudoku</h1>
-	<a id="homeLink" href="https://marusczak.com/Games-Home-Page" rel="noreferrer"><img id="homeIcon"
-			src="images/house-icon.png"></a>
-	<a id="gitHubLink" href="https://github.com/ShaneMarusczak/Sudoku-Game" target="_blank" rel="noreferrer"><img
-			id="githubicon" src="images/github-icon.png"></a>
-	<h3 id="introText">Select a difficulty then click Start Game to Begin!</h3>
-	<div id="difficultySelect">
-		<input type="radio" name="difficulty" value="easy" id="Easy">
-		<label for="Easy">Easy</label>
-		<input type="radio" name="difficulty" value="medium" id="Medium">
-		<label for="Medium">Medium</label>
-		<input type="radio" name="difficulty" value="hard" id="Hard">
-		<label for="Hard">Hard</label>
-		<input type="radio" name="difficulty" value="insane" id="Insane">
-		<label for="Insane">Insane</label>
-	</div>
-	<h2 id="timer" class="hide"><time>00:00:00</time></h2>
-	<div id="usedNums" class="hide">
-		<h2>Used:</h2>
-		<h2 id="used1" class="hide used">1</h2>
-		<h2 id="used2" class="hide used ">2</h2>
-		<h2 id="used3" class="hide used">3</h2>
-		<h2 id="used4" class="hide used">4</h2>
-		<h2 id="used5" class="hide used">5</h2>
-		<h2 id="used6" class="hide used">6</h2>
-		<h2 id="used7" class="hide used">7</h2>
-		<h2 id="used8" class="hide used">8</h2>
-		<h2 id="used9" class="hide used">9</h2>
-	</div>
-	<div id="sudoku" class="shadowBox"></div>
-	<div id="btns">
-		<div id="start" class="shadowBox btn">Start Game</div>
-		<div id="checkAnswer" class="shadowBox btn">Check Answer</div>
-		<div id="startover" class="shadowBox btn" onclick="location.reload()">Start Over</div>
-		<div id="toggleSize" class="shadowBox btn">Toggle Size</div>
-	</div>
-	<p id="updateText">Last Updated: October 8, 2020</p>
-</body>
-<script type="text/javascript" src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"></script>
-<script type="text/javascript" src="https://marusczak.com/BuildingBlocks/js/modal.min.js"></script>
-<script type="text/javascript" src="js/sudoku.min.js"></script>
+    <a
+      id="gitHubLink"
+      href="https://github.com/ShaneMarusczak/Sudoku-Game"
+      target="_blank"
+      rel="noreferrer"
+      ><img id="githubicon" src="images/github-icon.png"
+    /></a>
 
+    <h3 id="introText">Select a difficulty then click Start Game to Begin!</h3>
+    <div id="difficultySelect">
+      <input type="radio" name="difficulty" value="easy" id="Easy" />
+      <label for="Easy">Easy</label>
+      <input type="radio" name="difficulty" value="medium" id="Medium" />
+      <label for="Medium">Medium</label>
+      <input type="radio" name="difficulty" value="hard" id="Hard" />
+      <label for="Hard">Hard</label>
+      <input type="radio" name="difficulty" value="insane" id="Insane" />
+      <label for="Insane">Insane</label>
+    </div>
+    <h2 id="timer" class="hide"><time>00:00:00</time></h2>
+    <div id="usedNums" class="hide">
+      <h2>Used:</h2>
+      <h2 id="used1" class="hide used">1</h2>
+      <h2 id="used2" class="hide used">2</h2>
+      <h2 id="used3" class="hide used">3</h2>
+      <h2 id="used4" class="hide used">4</h2>
+      <h2 id="used5" class="hide used">5</h2>
+      <h2 id="used6" class="hide used">6</h2>
+      <h2 id="used7" class="hide used">7</h2>
+      <h2 id="used8" class="hide used">8</h2>
+      <h2 id="used9" class="hide used">9</h2>
+    </div>
+    <div id="sudoku" class="shadowBox"></div>
+    <div id="btns">
+      <div id="start" class="shadowBox btn">Start Game</div>
+      <div id="checkAnswer" class="shadowBox btn">Check Answer</div>
+      <div id="startover" class="shadowBox btn" onclick="location.reload()">
+        Start Over
+      </div>
+      <div id="toggleSize" class="shadowBox btn">Toggle Size</div>
+    </div>
+    <p id="updateText">Last Updated: October 8, 2020</p>
+  </body>
+  <script
+    type="text/javascript"
+    src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="https://marusczak.com/BuildingBlocks/js/modal.min.js"
+  ></script>
+  <script type="text/javascript" src="js/sudoku.min.js"></script>
 </html>
