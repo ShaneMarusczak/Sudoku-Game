@@ -6,4 +6,4 @@ Boards are seeded with 9 pseudorandom numbers to produce a different Sudoku boar
 
 Each difficulty controls how many of the generated values are show to the user.
 
-Boards are not checked against the originally produced board as many sudoku boards have multiple correct solutions. Instead, boards are deemed finished if all numbers on the board pass the rules of sudoku. (All columns, rows and 3x3 squares contain the number 1-9).
+Boards are not checked against the originally produced board as many sudoku boards have multiple correct solutions. Instead, boards are deemed finished if all numbers on the board pass the rules of sudoku. (All columns, rows and 3x3 squares contain the numbers 1-9).
