@@ -1,4 +1,4 @@
-#Sudoku
+# Sudoku
 
 Sudoku boards are generated using a technique that uses both recursion and backtracking ideas to produce complete game boards.
 
