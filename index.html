@@ -6,9 +6,10 @@
     <title>Sudoku</title>
     <link rel="stylesheet" type="text/css" href="css/style.min.css" />
     <link
-      rel="stylesheet"
+      rel="preload"
       type="text/css"
       href="https://marusczak.com/BuildingBlocks/css/modal.min.css"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
     <meta name="Description" content="Play Sudoku" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -72,9 +73,10 @@
     type="text/javascript"
     src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"
   ></script>
+  <script type="text/javascript" src="js/sudoku.min.js"></script>
   <script
     type="text/javascript"
     src="https://marusczak.com/BuildingBlocks/js/modal.min.js"
+    defer
   ></script>
-  <script type="text/javascript" src="js/sudoku.min.js"></script>
 </html>
