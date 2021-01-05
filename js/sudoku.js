@@ -374,7 +374,7 @@
         entry.id = "s" + i + j;
         noteOpen.id = "no" + i + j;
         entry.readOnly = true;
-        entry.type = "number";
+        entry.type = "text";
         entry.maxLength = 1;
         entry.addEventListener("focusout", numsUsed);
         entryDiv.classList.add("entryDiv");
