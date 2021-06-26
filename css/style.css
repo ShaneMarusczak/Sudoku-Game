@@ -10,10 +10,13 @@ html {
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#completedPuzzles {
-  position: absolute;
-  top: 200px;
-  left: 2vw;
+#introText {
+  margin-top: 14px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  margin-bottom: 10px;
 }
 
 #githubicon {
@@ -30,7 +33,7 @@ html {
 
 #timer {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 2px;
 }
 
 #githubicon:hover {
@@ -71,7 +74,7 @@ body {
 
 #difficultySelect {
   display: flex;
-  margin-bottom: 27px;
+  margin-bottom: 34px;
 }
 
 label {
@@ -86,10 +89,22 @@ input[type="radio"] {
   height: 25px;
 }
 
-@media screen and (max-width: 1280px) {
-  #completedPuzzles {
-    display: none;
-  }
+#timerContainer {
+  text-align: left;
+  margin-left: 20px;
+}
+
+#timerLabel {
+  font-size: 1.1em;
+  padding-left: 0px;
+}
+
+#hideTimer {
+  vertical-align: text-bottom;
+  margin-left: 3.5px;
+  margin-right: 0;
+  height: 17px;
+  width: 17px;
 }
 
 @media screen and (max-width: 860px) {

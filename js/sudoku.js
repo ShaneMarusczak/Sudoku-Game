@@ -12,12 +12,9 @@
   const rows = 9;
   const cols = 9;
   const boardUI = document.getElementById("sudoku");
-  const timerContainer = document.getElementById("timeContainer");
+  const timerContainer = document.getElementById("timerContainer");
   const checkBox = document.getElementById("hideTimer");
   const timer = document.getElementById("timer");
-  const completedPuzzlesOnLoad = Number(
-    window.getCookie("completedSudokuPuzzles")
-  );
   const copiedBoard = [];
   const answerBoard = [];
   const difficultySettings = {
@@ -118,9 +115,6 @@
       window.modal("Sorry, incorrect!", 1500);
       return;
     }
-    document.getElementById("completedPuzzles").innerText =
-      "Completed Puzzles: " + (completedPuzzlesOnLoad + 1);
-    window.setCookie("completedSudokuPuzzles", completedPuzzlesOnLoad + 1, 10);
     clearTimeout(runningTimer);
     window.modal("Correct!", 2500);
     window
@@ -417,7 +411,5 @@
     }
     checkBox.checked = window.getCookie("hideSudokuTimer") === "Y";
     toggleTimer();
-    document.getElementById("completedPuzzles").innerText =
-      "Completed Puzzles: " + completedPuzzlesOnLoad;
   })();
 })();

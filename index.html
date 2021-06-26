@@ -14,8 +14,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   </head>
 
-  <h2 id="completedPuzzles"></h2>
-
   <body>
     <h1>Sudoku</h1>
     <a
@@ -44,10 +42,10 @@
       <input type="radio" name="difficulty" value="insane" id="Insane" />
       <label for="Insane">Insane</label>
     </div>
-    <div id="timeContainer" class="hide">
+    <div id="timerContainer" class="hide">
       <h2 id="timer" class="hide"><time>00:00:00</time></h2>
       <input type="checkbox" name="hideTimer" id="hideTimer" value="" />
-      <label for="hideTimer">Hide Timer?</label>
+      <label for="hideTimer" id="timerLabel">Hide Timer</label>
     </div>
     <div id="usedNums" class="hide">
       <h2>Used:</h2>
@@ -70,13 +68,13 @@
       </div>
       <div id="toggleSize" class="shadowBox btn">Toggle Size</div>
     </div>
-    <p id="updateText">Last Updated: October 8, 2020</p>
+    <p id="updateText" title="10:13 PM">Last Updated: June 12, 2021</p>
   </body>
   <script
     type="text/javascript"
     src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"
   ></script>
-  <script type="text/javascript" src="js/sudoku.js"></script>
+  <script type="text/javascript" src="js/sudoku.min.js"></script>
   <script
     type="text/javascript"
     src="https://marusczak.com/BuildingBlocks/js/modal.min.js"
