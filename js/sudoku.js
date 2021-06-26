@@ -12,6 +12,8 @@
   const rows = 9;
   const cols = 9;
   const boardUI = document.getElementById("sudoku");
+  const timerContainer = document.getElementById("timeContainer");
+  const checkBox = document.getElementById("hideTimer");
   const timer = document.getElementById("timer");
   const completedPuzzlesOnLoad = Number(
     window.getCookie("completedSudokuPuzzles")
@@ -95,6 +97,7 @@
     document.getElementById("difficultySelect").classList.add("hide");
     document.getElementById("introText").classList.add("hide");
     timer.classList.remove("hide");
+    timerContainer.classList.remove("hide");
     timerStart();
   };
 
@@ -343,8 +346,19 @@
       .forEach((elem) => elem.classList.remove("noteOpenDivToggle"));
   };
 
+  const toggleTimer = () => {
+    if (checkBox.checked) {
+      timer.classList.add("invsible");
+      window.setCookie("hideSudokuTimer", "Y", 30);
+    } else {
+      timer.classList.remove("invsible");
+      window.setCookie("hideSudokuTimer", "N", 30);
+    }
+  };
+
   (() => {
     document.getElementById("start").addEventListener("click", start);
+    document.getElementById("hideTimer").addEventListener("click", toggleTimer);
     document
       .getElementById("checkAnswer")
       .addEventListener("click", checkAnswer);
@@ -401,6 +415,8 @@
     if (window.getCookie("largeBoard") === "false") {
       makeBoardSmall();
     }
+    checkBox.checked = window.getCookie("hideSudokuTimer") === "Y";
+    toggleTimer();
     document.getElementById("completedPuzzles").innerText =
       "Completed Puzzles: " + completedPuzzlesOnLoad;
   })();

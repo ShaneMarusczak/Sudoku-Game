@@ -44,7 +44,11 @@
       <input type="radio" name="difficulty" value="insane" id="Insane" />
       <label for="Insane">Insane</label>
     </div>
-    <h2 id="timer" class="hide"><time>00:00:00</time></h2>
+    <div id="timeContainer" class="hide">
+      <h2 id="timer" class="hide"><time>00:00:00</time></h2>
+      <input type="checkbox" name="hideTimer" id="hideTimer" value="" />
+      <label for="hideTimer">Hide Timer?</label>
+    </div>
     <div id="usedNums" class="hide">
       <h2>Used:</h2>
       <h2 id="used1" class="hide used">1</h2>
@@ -72,7 +76,7 @@
     type="text/javascript"
     src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"
   ></script>
-  <script type="text/javascript" src="js/sudoku.min.js"></script>
+  <script type="text/javascript" src="js/sudoku.js"></script>
   <script
     type="text/javascript"
     src="https://marusczak.com/BuildingBlocks/js/modal.min.js"
