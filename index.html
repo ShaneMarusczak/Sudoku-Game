@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=800" />
     <title>Sudoku</title>
@@ -15,6 +21,17 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
     <link rel="manifest" href="site.webmanifest" />
+    <script
+      type="text/javascript"
+      src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"
+      defer
+    ></script>
+    <script type="text/javascript" src="js/sudoku.min.js" defer></script>
+    <script
+      type="text/javascript"
+      src="https://marusczak.com/BuildingBlocks/js/modal.min.js"
+      defer
+    ></script>
   </head>
 
   <body>
@@ -47,8 +64,10 @@
     </div>
     <div id="timerContainer" class="hide">
       <h2 id="timer" class="hide"><time>00:00:00</time></h2>
-      <input type="checkbox" name="hideTimer" id="hideTimer" value="" />
-      <label for="hideTimer" id="timerLabel">Hide Timer</label>
+      <div class="hideTimerContainer">
+        <input type="checkbox" name="hideTimer" id="hideTimer" value="" />
+        <label for="hideTimer" id="timerLabel">Hide Timer</label>
+      </div>
     </div>
     <div id="usedNums" class="hide">
       <h2>Used:</h2>
@@ -73,14 +92,4 @@
     </div>
     <p id="updateText" title="5:19 PM">Last Updated: July 18, 2021</p>
   </body>
-  <script
-    type="text/javascript"
-    src="https://marusczak.com/BuildingBlocks/js/buildingBlocks.min.js"
-  ></script>
-  <script type="text/javascript" src="js/sudoku.min.js"></script>
-  <script
-    type="text/javascript"
-    src="https://marusczak.com/BuildingBlocks/js/modal.min.js"
-    defer
-  ></script>
 </html>

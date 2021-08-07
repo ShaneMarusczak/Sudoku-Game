@@ -62,7 +62,7 @@
         (elem) => elem.checked
       )
     ) {
-      window.modal("Please select a difficulty.", 1600);
+      window.modal("Select a difficulty", 1600);
       return;
     }
 
