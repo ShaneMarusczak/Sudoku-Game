@@ -103,7 +103,7 @@
       return;
     }
     if (!validate()) {
-      window.modal("Not all entries are valid!", 1500);
+      window.modal("Sorry, incorrect!", 1500);
       return;
     }
     for (let y = 0; y < rows; y++) {
