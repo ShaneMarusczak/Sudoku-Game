@@ -116,7 +116,7 @@ input[type="checkbox"] {
 }
 
 @media screen and (max-width: 860px) {
-  input[type="text"] {
+  input[type="number"] {
     width: 49px !important;
     height: 49px !important;
     padding: 0;
@@ -175,8 +175,8 @@ input[type="checkbox"] {
   border-bottom: 4px solid black !important;
 }
 
-input[type="text"]:focus,
-input[type="text"]:hover {
+input[type="number"]:focus,
+input[type="number"]:hover {
   background-color: rgb(159, 205, 243) !important;
 }
 
@@ -184,13 +184,25 @@ input[type="text"]:hover {
   display: flex;
 }
 
-input[type="text"] {
+input[type="number"] {
   border: 1px solid black;
   width: 65px;
   height: 65px;
   text-align: center;
   font-size: xx-large;
   background-color: aliceblue;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .hide {
@@ -226,7 +238,7 @@ textarea {
   margin-left: 57px;
 }
 
-input[type="text"],
+input[type="number"],
 textarea,
 .noteOpenDiv {
   grid-column: 1;

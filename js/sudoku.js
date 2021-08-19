@@ -111,8 +111,13 @@
         answerBoard[y][x] = document.getElementById("s" + y + x).value;
       }
     }
-    if (!validBoard(answerBoard)) {
+    const errors = validBoard(answerBoard);
+    if (errors.length != 0) {
       window.modal("Sorry, incorrect!", 1500);
+      errors.forEach((e) => {
+        const [x, y] = e;
+        document.getElementById("s" + y + x).style.background = "red";
+      });
       return;
     }
     clearTimeout(runningTimer);
@@ -145,14 +150,15 @@
   };
 
   const validBoard = (board) => {
+    const errors = [];
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         if (!possible(y, x, board[y][x], board, true)) {
-          return false;
+          errors.push([x, y]);
         }
       }
     }
-    return true;
+    return errors;
   };
 
   const solve = (copyTo) => {
@@ -306,7 +312,7 @@
 
   const makeBoardSmall = () => {
     document
-      .querySelectorAll("input[type=text]")
+      .querySelectorAll("input[type=number]")
       .forEach((elem) => elem.classList.add("textInputToggle"));
     document
       .querySelectorAll(".oddRight")
@@ -324,7 +330,7 @@
 
   const makeBoardBig = () => {
     document
-      .querySelectorAll("input[type=text]")
+      .querySelectorAll("input[type=number]")
       .forEach((elem) => elem.classList.remove("textInputToggle"));
     document
       .querySelectorAll(".oddRight")
@@ -382,9 +388,9 @@
         entry.id = "s" + i + j;
         noteOpen.id = "no" + i + j;
         entry.readOnly = true;
-        entry.type = "text";
+        entry.type = "number";
         entry.maxLength = 1;
-        entry.addEventListener("focusout", numsUsed);
+        entry.addEventListener("input", numsUsed);
         entryDiv.classList.add("entryDiv");
         noteOpenDiv.classList.add("noteOpenDiv");
         entryDiv.addEventListener("mouseover", noteOpenButtonShow);
