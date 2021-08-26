@@ -122,6 +122,11 @@
     }
     clearTimeout(runningTimer);
     window.modal("Correct!", 2500);
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        document.getElementById("s" + y + x).readOnly = true;
+      }
+    }
     window
       .sleep(1500)
       .then(() => window.modal("You finished in " + timer.textContent, 3000));
