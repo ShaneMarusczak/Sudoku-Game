@@ -121,15 +121,18 @@
       return;
     }
     clearTimeout(runningTimer);
-    window.modal("Correct!", 2500);
+    window.modal("Correct!", 2000);
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         document.getElementById("s" + y + x).readOnly = true;
       }
     }
-    window
-      .sleep(1500)
-      .then(() => window.modal("You finished in " + timer.textContent, 3000));
+    if (!checkBox.checked) {
+      window
+        .sleep(2000)
+        .then(() => window.closableModal("Completed in " + timer.textContent));
+    }
+
     boardtoGreen();
     gameOver = true;
   };

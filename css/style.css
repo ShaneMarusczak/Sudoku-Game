@@ -245,7 +245,7 @@ textarea,
   grid-row: 1;
 }
 
-span:not(#modal-message) {
+span:not(#modal-message, #close-button) {
   z-index: 2;
   opacity: 0;
   position: absolute;
