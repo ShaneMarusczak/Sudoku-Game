@@ -1,7 +1,7 @@
 "use strict";
 (() => {
-  var runningTimer;
-  var board = [];
+  let runningTimer;
+  const board = [];
   let seconds = 0;
   let minutes = 0;
   let hours = 0;
@@ -62,7 +62,7 @@
         (elem) => elem.checked
       )
     ) {
-      window.modal("Select a difficulty", 1600);
+      modal("Select a difficulty", 1600);
       return;
     }
 
@@ -73,7 +73,7 @@
       for (let x = 0; x < cols; x++) {
         document.getElementById("s" + y + x).readOnly = false;
         if (
-          window.randomIntFromInterval(
+          randomIntFromInterval(
             0,
             difficultySettings[difficulty.value]
           ) === 0
@@ -103,7 +103,7 @@
       return;
     }
     if (!validate()) {
-      window.modal("Sorry, incorrect!", 1500);
+      modal("Sorry, incorrect!", 1500);
       return;
     }
     for (let y = 0; y < rows; y++) {
@@ -112,8 +112,8 @@
       }
     }
     const errors = validBoard(answerBoard);
-    if (errors.length != 0) {
-      window.modal("Sorry, incorrect!", 1500);
+    if (errors.length !== 0) {
+      modal("Sorry, incorrect!", 1500);
       errors.forEach((e) => {
         const [x, y] = e;
         document.getElementById("s" + y + x).style.background = "red";
@@ -121,16 +121,15 @@
       return;
     }
     clearTimeout(runningTimer);
-    window.modal("Correct!", 2000);
+    modal("Correct!", 2000);
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         document.getElementById("s" + y + x).readOnly = true;
       }
     }
     if (!checkBox.checked) {
-      window
-        .sleep(2000)
-        .then(() => window.closableModal("Completed in " + timer.textContent));
+      sleep(2000)
+        .then(() => closableModal("Completed in " + timer.textContent));
     }
 
     boardtoGreen();
@@ -175,7 +174,7 @@
     }
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        if (board[y][x] == "") {
+        if (board[y][x] === "") {
           for (let n = 1; n < 10; n++) {
             if (solved) {
               return;
@@ -204,16 +203,16 @@
 
   const possible = (y, x, n, boardArg, checkingMode) => {
     for (let i = 0; i < 9; i++) {
-      if (boardArg[y][i] == n) {
-        if (i == x && checkingMode) {
+      if (boardArg[y][i] === n) {
+        if (i === x && checkingMode) {
           continue;
         }
         return false;
       }
     }
     for (let i = 0; i < 9; i++) {
-      if (boardArg[i][x] == n) {
-        if (i == y && checkingMode) {
+      if (boardArg[i][x] === n) {
+        if (i === y && checkingMode) {
           continue;
         }
         return false;
@@ -223,8 +222,8 @@
     const y0 = Math.floor(y / 3) * 3;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (boardArg[y0 + i][x0 + j] == n) {
-          if (y0 + i == y && x0 + j == x && checkingMode) {
+        if (boardArg[y0 + i][x0 + j] === n) {
+          if (y0 + i === y && x0 + j === x && checkingMode) {
             continue;
           }
           return false;
@@ -235,15 +234,15 @@
   };
 
   const generateRandomBoard = () => {
-    board[0][0] = window.randomIntFromInterval(1, 9);
-    board[1][7] = window.randomIntFromInterval(1, 9);
-    board[2][4] = window.randomIntFromInterval(1, 9);
-    board[3][3] = window.randomIntFromInterval(1, 9);
-    board[4][1] = window.randomIntFromInterval(1, 9);
-    board[5][8] = window.randomIntFromInterval(1, 9);
-    board[6][6] = window.randomIntFromInterval(1, 9);
-    board[7][2] = window.randomIntFromInterval(1, 9);
-    board[8][5] = window.randomIntFromInterval(1, 9);
+    board[0][0] = randomIntFromInterval(1, 9);
+    board[1][7] = randomIntFromInterval(1, 9);
+    board[2][4] = randomIntFromInterval(1, 9);
+    board[3][3] = randomIntFromInterval(1, 9);
+    board[4][1] = randomIntFromInterval(1, 9);
+    board[5][8] = randomIntFromInterval(1, 9);
+    board[6][6] = randomIntFromInterval(1, 9);
+    board[7][2] = randomIntFromInterval(1, 9);
+    board[8][5] = randomIntFromInterval(1, 9);
     solve(copiedBoard);
   };
 
@@ -309,12 +308,12 @@
   };
 
   const toggleSize = () => {
-    if (window.getCookie("largeBoard") === "false") {
+    if (getCookie("largeBoard") === "false") {
       makeBoardBig();
-      window.setCookie("largeBoard", "true", 10);
+      setCookie("largeBoard", "true", 10);
     } else {
       makeBoardSmall();
-      window.setCookie("largeBoard", "false", 10);
+      setCookie("largeBoard", "false", 10);
     }
   };
 
@@ -357,12 +356,78 @@
   const toggleTimer = () => {
     if (checkBox.checked) {
       timer.classList.add("invsible");
-      window.setCookie("hideSudokuTimer", "Y", 30);
+      setCookie("hideSudokuTimer", "Y", 30);
     } else {
       timer.classList.remove("invsible");
-      window.setCookie("hideSudokuTimer", "N", 30);
+      setCookie("hideSudokuTimer", "N", 30);
     }
   };
+
+  function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    const expires = "expires=" + d.toUTCString();
+    document.cookie =
+        cname + "=" + cvalue + ";" + expires + ";path=/;SameSite=Lax";
+  }
+
+  function getCookie(cname) {
+    const name = cname + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function modal(message, duration) {
+    const modalBox = document.createElement("div");
+    modalBox.id = "modal-box";
+    const innerModalBox = document.createElement("div");
+    innerModalBox.id = "inner-modal-box";
+    const modalMessage = document.createElement("span");
+    modalMessage.id = "modal-message";
+    innerModalBox.appendChild(modalMessage);
+    modalBox.appendChild(innerModalBox);
+    modalMessage.innerText = message;
+    document.getElementsByTagName("html")[0].appendChild(modalBox);
+    sleep(duration).then(() => modalBox.remove());
+  }
+
+  function closableModal(message) {
+    const modalBox = document.createElement("div");
+    modalBox.id = "modal-box";
+    const innerModalBox = document.createElement("div");
+    innerModalBox.id = "inner-modal-box";
+    const modalMessage = document.createElement("span");
+    modalMessage.id = "modal-message";
+    const closeButton = document.createElement("span");
+    closeButton.id = "close-button";
+    closeButton.innerHTML = "&times;";
+    innerModalBox.appendChild(modalMessage);
+    innerModalBox.appendChild(closeButton);
+    modalBox.appendChild(innerModalBox);
+    modalMessage.innerText = message;
+    document.getElementsByTagName("html")[0].appendChild(modalBox);
+    closeButton.addEventListener("click", () => {
+      modalBox.remove();
+    });
+  }
 
   (() => {
     document.getElementById("start").addEventListener("click", start);
@@ -420,10 +485,10 @@
         }
       }
     }
-    if (window.getCookie("largeBoard") === "false") {
+    if (getCookie("largeBoard") === "false") {
       makeBoardSmall();
     }
-    checkBox.checked = window.getCookie("hideSudokuTimer") === "Y";
+    checkBox.checked = getCookie("hideSudokuTimer") === "Y";
     toggleTimer();
   })();
 })();
