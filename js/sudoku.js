@@ -9,6 +9,7 @@
   let solved = false;
   let gameStarted = false;
   let gameOver = false;
+
   const rows = 9;
   const cols = 9;
   const boardUI = document.getElementById("sudoku");
@@ -429,6 +430,49 @@
     });
   }
 
+  function handleKeyboardInput(e) {
+      const elemWithFocus = document.activeElement;
+
+      if (!elemWithFocus.classList.contains("arrow-nav")) {
+        return;
+      }
+
+      const row = Number(elemWithFocus.getAttribute("row"));
+      const col = Number(elemWithFocus.getAttribute("col"));
+
+
+    switch (e.key) {
+        case "ArrowUp":
+          e.preventDefault();
+          if (row - 1 < 0) {
+            return;
+        }
+          document.getElementById("s" + (row - 1) + col).focus();
+          break;
+      case "ArrowDown":
+        e.preventDefault();
+        if (row + 1 >= rows) {
+          return;
+        }
+        document.getElementById("s" + (row + 1) + col).focus();
+        break;
+      case "ArrowLeft":
+        e.preventDefault();
+        if (col - 1 < 0) {
+          return;
+        }
+        document.getElementById("s" + row + (col - 1)).focus();
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        if (col + 1 >= cols) {
+          return;
+        }
+        document.getElementById("s" + row + (col + 1)).focus();
+        break;
+      }
+  }
+
   (() => {
     document.getElementById("start").addEventListener("click", start);
     document.getElementById("hideTimer").addEventListener("click", toggleTimer);
@@ -436,6 +480,8 @@
       .getElementById("checkAnswer")
       .addEventListener("click", checkAnswer);
     document.getElementById("toggleSize").addEventListener("click", toggleSize);
+
+    document.addEventListener("keydown", handleKeyboardInput);
 
     for (let i = 0; i < rows; i++) {
       board.push([]);
@@ -463,7 +509,10 @@
         entry.readOnly = true;
         entry.type = "number";
         entry.maxLength = 1;
+        entry.classList.add("arrow-nav")
         entry.addEventListener("input", numsUsed);
+        entry.setAttribute("row", i.toString());
+        entry.setAttribute("col", j.toString());
         entryDiv.classList.add("entryDiv");
         noteOpenDiv.classList.add("noteOpenDiv");
         entryDiv.addEventListener("mouseover", noteOpenButtonShow);
