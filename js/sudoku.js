@@ -18,12 +18,17 @@
   const timer = document.getElementById("timer");
   const copiedBoard = [];
   const answerBoard = [];
+  const cells = {};
   const difficultySettings = {
     easy: 1,
     hard: 3,
     insane: 5,
     medium: 2,
   };
+
+  const getCell = (row, col) => cells[`${row},${col}`];
+  const getNoteOpen = (row, col) => cells[`no${row},${col}`];
+  const getNote = (row, col) => cells[`n${row},${col}`];
 
   const timerTick = () => {
     seconds++;
@@ -46,6 +51,18 @@
 
   const timerStart = () => {
     runningTimer = setTimeout(timerTick, 1000);
+  };
+
+  const stopTimer = () => {
+    if (runningTimer) {
+      clearTimeout(runningTimer);
+      runningTimer = null;
+    }
+  };
+
+  const resetGame = () => {
+    stopTimer();
+    location.reload();
   };
 
   const selectedRadioBtnForForm = (formName) =>
@@ -72,17 +89,18 @@
     generateRandomBoard();
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        document.getElementById("s" + y + x).readOnly = false;
+        const cell = getCell(y, x);
+        cell.readOnly = false;
         if (
           randomIntFromInterval(
             0,
             difficultySettings[difficulty.value]
           ) === 0
         ) {
-          document.getElementById("s" + y + x).value = copiedBoard[y][x];
-          document.getElementById("s" + y + x).readOnly = true;
+          cell.value = copiedBoard[y][x];
+          cell.readOnly = true;
         } else {
-          document.getElementById("no" + y + x).classList.remove("hide");
+          getNoteOpen(y, x).classList.remove("hide");
         }
       }
     }
@@ -109,7 +127,7 @@
     }
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        answerBoard[y][x] = document.getElementById("s" + y + x).value;
+        answerBoard[y][x] = getCell(y, x).value;
       }
     }
     const errors = validBoard(answerBoard);
@@ -117,15 +135,15 @@
       modal("Sorry, incorrect!", 1500);
       errors.forEach((e) => {
         const [x, y] = e;
-        document.getElementById("s" + y + x).style.background = "red";
+        getCell(y, x).style.background = "red";
       });
       return;
     }
-    clearTimeout(runningTimer);
+    stopTimer();
     modal("Correct!", 2000);
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        document.getElementById("s" + y + x).readOnly = true;
+        getCell(y, x).readOnly = true;
       }
     }
     if (!checkBox.checked) {
@@ -140,7 +158,7 @@
   const boardtoGreen = () => {
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        document.getElementById("s" + y + x).style.background = "darkseagreen";
+        getCell(y, x).style.background = "darkseagreen";
       }
     }
   };
@@ -149,7 +167,7 @@
     const validValues = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        if (!validValues.includes(document.getElementById("s" + y + x).value)) {
+        if (!validValues.includes(getCell(y, x).value)) {
           return false;
         }
       }
@@ -247,19 +265,26 @@
     solve(copiedBoard);
   };
 
+  const parseCoords = (id, prefixLen) => {
+    const coords = id.substring(prefixLen);
+    return [parseInt(coords[0]), parseInt(coords[1])];
+  };
+
   const noteDisplayHandler = (e) => {
-    const noteElem = document.getElementById("n" + e.target.id.substring(2));
+    const [row, col] = parseCoords(e.target.id, 2);
+    const noteElem = getNote(row, col);
+    const noteOpenElem = getNoteOpen(row, col);
     if (
       noteElem.classList.contains("hide") &&
       gameStarted &&
-      document.getElementById("s" + e.target.id.substring(2)).readOnly !== true
+      getCell(row, col).readOnly !== true
     ) {
       noteElem.classList.remove("hide");
       noteElem.focus();
-      document.getElementById("no" + e.target.id.substring(2)).innerHTML = "«";
+      noteOpenElem.innerHTML = "«";
     } else {
       noteElem.classList.add("hide");
-      document.getElementById("no" + e.target.id.substring(2)).innerHTML = "»";
+      noteOpenElem.innerHTML = "»";
     }
   };
 
@@ -267,19 +292,18 @@
     if (
       gameStarted &&
       e.target.tagName !== "SPAN" &&
-      e.target.tagName !== "DIV" &&
-      document.getElementById("s" + e.target.id.substring(1)).readOnly !== true
+      e.target.tagName !== "DIV"
     ) {
-      document
-        .getElementById("no" + e.target.id.substring(1))
-        .classList.add("opaque");
+      const [row, col] = parseCoords(e.target.id, 1);
+      if (getCell(row, col).readOnly !== true) {
+        getNoteOpen(row, col).classList.add("opaque");
+      }
     }
   };
 
   const noteOpenButtonHide = (e) => {
-    document
-      .getElementById("no" + e.target.id.substring(2))
-      .classList.remove("opaque");
+    const [row, col] = parseCoords(e.target.id, 2);
+    getNoteOpen(row, col).classList.remove("opaque");
   };
 
   const numsUsed = () => {
@@ -296,7 +320,7 @@
     };
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
-        numsDict[document.getElementById("s" + y + x).value]++;
+        numsDict[getCell(y, x).value]++;
       }
     }
     for (let i = 1; i < 10; i++) {
@@ -309,57 +333,36 @@
   };
 
   const toggleSize = () => {
-    if (getCookie("largeBoard") === "false") {
-      makeBoardBig();
-      setCookie("largeBoard", "true", 10);
-    } else {
-      makeBoardSmall();
-      setCookie("largeBoard", "false", 10);
-    }
+    const isSmall = getCookie("largeBoard") === "false";
+    setBoardSize(!isSmall);
+    setCookie("largeBoard", isSmall ? "true" : "false", 10);
   };
 
-  const makeBoardSmall = () => {
+  const setBoardSize = (small) => {
+    const action = small ? "add" : "remove";
     document
       .querySelectorAll("input[type=number]")
-      .forEach((elem) => elem.classList.add("textInputToggle"));
+      .forEach((elem) => elem.classList[action]("textInputToggle"));
     document
       .querySelectorAll(".oddRight")
-      .forEach((elem) => elem.classList.add("oddRightToggle"));
+      .forEach((elem) => elem.classList[action]("oddRightToggle"));
     document
       .querySelectorAll(".strangeRight")
-      .forEach((elem) => elem.classList.add("strangeRightToggle"));
+      .forEach((elem) => elem.classList[action]("strangeRightToggle"));
     document
       .querySelectorAll("textarea")
-      .forEach((elem) => elem.classList.add("textareaToggle"));
+      .forEach((elem) => elem.classList[action]("textareaToggle"));
     document
       .querySelectorAll(".noteOpenDiv")
-      .forEach((elem) => elem.classList.add("noteOpenDivToggle"));
-  };
-
-  const makeBoardBig = () => {
-    document
-      .querySelectorAll("input[type=number]")
-      .forEach((elem) => elem.classList.remove("textInputToggle"));
-    document
-      .querySelectorAll(".oddRight")
-      .forEach((elem) => elem.classList.remove("oddRightToggle"));
-    document
-      .querySelectorAll(".strangeRight")
-      .forEach((elem) => elem.classList.remove("strangeRightToggle"));
-    document
-      .querySelectorAll("textarea")
-      .forEach((elem) => elem.classList.remove("textareaToggle"));
-    document
-      .querySelectorAll(".noteOpenDiv")
-      .forEach((elem) => elem.classList.remove("noteOpenDivToggle"));
+      .forEach((elem) => elem.classList[action]("noteOpenDivToggle"));
   };
 
   const toggleTimer = () => {
     if (checkBox.checked) {
-      timer.classList.add("invsible");
+      timer.classList.add("invisible");
       setCookie("hideSudokuTimer", "Y", 30);
     } else {
-      timer.classList.remove("invsible");
+      timer.classList.remove("invisible");
       setCookie("hideSudokuTimer", "N", 30);
     }
   };
@@ -382,7 +385,12 @@
 
   function getCookie(cname) {
     const name = cname + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
+    let decodedCookie;
+    try {
+      decodedCookie = decodeURIComponent(document.cookie);
+    } catch (e) {
+      return "";
+    }
     const ca = decodedCookie.split(";");
     for (let i = 0; i < ca.length; i++) {
       let c = ca[i];
@@ -390,10 +398,22 @@
         c = c.substring(1);
       }
       if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length);
+        const value = c.substring(name.length, c.length);
+        return validateCookieValue(cname, value);
       }
     }
     return "";
+  }
+
+  function validateCookieValue(name, value) {
+    const validValues = {
+      largeBoard: ["true", "false"],
+      hideSudokuTimer: ["Y", "N"],
+    };
+    if (validValues[name] && !validValues[name].includes(value)) {
+      return "";
+    }
+    return value;
   }
 
   function modal(message, duration) {
@@ -442,35 +462,35 @@
 
 
     switch (e.key) {
-        case "ArrowUp":
-          e.preventDefault();
-          if (row - 1 < 0) {
-            return;
+      case "ArrowUp":
+        e.preventDefault();
+        if (row - 1 < 0) {
+          return;
         }
-          document.getElementById("s" + (row - 1) + col).focus();
-          break;
+        getCell(row - 1, col).focus();
+        break;
       case "ArrowDown":
         e.preventDefault();
         if (row + 1 >= rows) {
           return;
         }
-        document.getElementById("s" + (row + 1) + col).focus();
+        getCell(row + 1, col).focus();
         break;
       case "ArrowLeft":
         e.preventDefault();
         if (col - 1 < 0) {
           return;
         }
-        document.getElementById("s" + row + (col - 1)).focus();
+        getCell(row, col - 1).focus();
         break;
       case "ArrowRight":
         e.preventDefault();
         if (col + 1 >= cols) {
           return;
         }
-        document.getElementById("s" + row + (col + 1)).focus();
+        getCell(row, col + 1).focus();
         break;
-      }
+    }
   }
 
   (() => {
@@ -480,6 +500,7 @@
       .getElementById("checkAnswer")
       .addEventListener("click", checkAnswer);
     document.getElementById("toggleSize").addEventListener("click", toggleSize);
+    document.getElementById("startover").addEventListener("click", resetGame);
 
     document.addEventListener("keydown", handleKeyboardInput);
 
@@ -489,6 +510,7 @@
       answerBoard.push([]);
       const entryRow = document.createElement("div");
       entryRow.classList.add("entryRow");
+      entryRow.setAttribute("role", "row");
       boardUI.appendChild(entryRow);
       for (let j = 0; j < cols; j++) {
         answerBoard[i][j] = "";
@@ -506,6 +528,9 @@
         note.id = "n" + i + j;
         entry.id = "s" + i + j;
         noteOpen.id = "no" + i + j;
+        cells[`${i},${j}`] = entry;
+        cells[`n${i},${j}`] = note;
+        cells[`no${i},${j}`] = noteOpen;
         entry.readOnly = true;
         entry.type = "number";
         entry.maxLength = 1;
@@ -513,7 +538,11 @@
         entry.addEventListener("input", numsUsed);
         entry.setAttribute("row", i.toString());
         entry.setAttribute("col", j.toString());
+        entry.setAttribute("aria-label", `Row ${i + 1}, Column ${j + 1}`);
+        entry.setAttribute("min", "1");
+        entry.setAttribute("max", "9");
         entryDiv.classList.add("entryDiv");
+        entryDiv.setAttribute("role", "gridcell");
         noteOpenDiv.classList.add("noteOpenDiv");
         entryDiv.addEventListener("mouseover", noteOpenButtonShow);
         entryDiv.addEventListener("mouseleave", noteOpenButtonHide);
@@ -535,7 +564,7 @@
       }
     }
     if (getCookie("largeBoard") === "false") {
-      makeBoardSmall();
+      setBoardSize(true);
     }
     checkBox.checked = getCookie("hideSudokuTimer") === "Y";
     toggleTimer();

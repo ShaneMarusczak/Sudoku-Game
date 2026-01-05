@@ -66,14 +66,12 @@
       <h2 id="used8" class="hide used">8</h2>
       <h2 id="used9" class="hide used">9</h2>
     </div>
-    <div id="sudoku" class="shadowBox"></div>
+    <div id="sudoku" class="shadowBox" role="grid" aria-label="Sudoku puzzle grid"></div>
     <div id="btns">
-      <div id="start" class="shadowBox btn">Start Game</div>
-      <div id="checkAnswer" class="shadowBox btn">Check Answer</div>
-      <div id="startover" class="shadowBox btn" onclick="location.reload()">
-        Start Over
-      </div>
-      <div id="toggleSize" class="shadowBox btn">Toggle Size</div>
+      <button type="button" id="start" class="shadowBox btn">Start Game</button>
+      <button type="button" id="checkAnswer" class="shadowBox btn">Check Answer</button>
+      <button type="button" id="startover" class="shadowBox btn">Start Over</button>
+      <button type="button" id="toggleSize" class="shadowBox btn">Toggle Size</button>
     </div>
     <p id="updateText" title="10:57 AM">Last Updated: March 9, 2021</p>
   </body>
